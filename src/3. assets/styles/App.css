@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:500&display=swap');
+
+* {
+    font-family: Montserrat, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+/* HOMEPAGE */
+.background-home {
+    background-color: whitesmoke;
+}
+
+.page-container {
+    padding: 125px 80px 80px 80px;
+    background-color: whitesmoke;
+}
+/* HOMEPAGE */
