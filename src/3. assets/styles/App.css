@@ -19,3 +19,13 @@ html {
     background-color: whitesmoke;
 }
 /* HOMEPAGE */
+
+
+
+/* RESPONSIVES */
+@media only screen and (max-width: 600px) {
+    .page-container {
+        padding: 100px 40px 60px 40px;
+    }
+}
+/* RESPONSIVES */

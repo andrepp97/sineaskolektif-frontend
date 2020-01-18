@@ -10,6 +10,12 @@ class Login extends Component {
         passError: ''
     }
 
+    // LIFECYCLE //
+    componentDidMount() {
+        window.scrollTo(0, 0)
+    }
+    // LIFECYCLE //
+
     // Cek Apakah Semua Kolom Sudah Diisi //
     validateInput = () => {
         let emailError, passError = ''

@@ -14,6 +14,12 @@ class Register extends Component {
         pass2Error: ''
     }
 
+    // LIFECYCLE //
+    componentDidMount() {
+        window.scrollTo(0, 0)
+    }
+    // LIFECYCLE //
+
     // Cek Apakah Semua Kolom Sudah Diisi //
     validateInput = () => {
         let nameError, emailError, passError, pass2Error = ''

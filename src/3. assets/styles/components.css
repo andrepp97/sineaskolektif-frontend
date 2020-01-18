@@ -18,6 +18,9 @@
 
 /* CAMPAIGN */
 .campaign-card {
+    width: 20rem;
+    margin: 12px;
+
     transition: .25s ease;
 }
 .campaign-card:hover {

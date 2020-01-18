@@ -3,7 +3,7 @@ import { MDBIcon, MDBProgress  } from 'mdbreact';
 
 const CampaignCard = () => {
     return (
-        <div className="col-lg-4 my-3">
+        // <div className="col-lg-4 my-3">
             <div className="card campaign-card">
                 <img
                     className="img-fluid card-img-top"
@@ -31,7 +31,7 @@ const CampaignCard = () => {
                     <p><b>60%</b> Tercapai</p>
                 </div>
             </div>
-        </div>
+        // </div>
     );
 };
 

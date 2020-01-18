@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { MDBContainer, MDBBtn } from 'mdbreact';
+import { MDBBtn } from 'mdbreact';
 
 // IMPORT COMPONENTS
 import CampaignCard from '../../../1. components/CampaignCard';
@@ -12,12 +12,12 @@ class Campaign extends Component {
 
     render() {
         return (
-            <MDBContainer className='text-center py-5 border-bottom'>
+            <div className='container-fluid text-center py-5 border-bottom'>
                 <div className="col-md-6 offset-md-3 justify-content-center">
                     <h2 className="h2-responsive">CAMPAIGN TERBARU</h2>
                     <p className='opacity-80'>Yuk Temukan Kolaborasi Menarik Disini</p>
                 </div>
-                <div className="row my-4">
+                <div className="row my-4 justify-content-center">
                     <CampaignCard />
                     <CampaignCard />
                     <CampaignCard />
@@ -25,7 +25,7 @@ class Campaign extends Component {
                 <MDBBtn outline color="indigo" className="rounded-pill">
                     LIHAT SEMUA
                 </MDBBtn>
-            </MDBContainer>
+            </div>
         );
     }
 }
