@@ -22,11 +22,13 @@ const CampaignCard = ({data}) => {
 
             <div className="card-footer">
                 <div className="row">
-                    <div className="col-6 text-left">
-                        <MDBIcon far icon="user-circle" /> <small className="font-weight-bold">{data.user}</small>
+                    <div className="col-6 d-flex align-items-center">
+                        <MDBIcon far icon="user-circle" />
+                        <small className="font-weight-bold ml-1">{data.user}</small>
                     </div>
-                    <div className="col-6 text-right">
-                        <MDBIcon far icon="clock" /> <small>{data.remaining} hari lagi</small>
+                    <div className="col-6 d-flex align-items-center justify-content-end">
+                        <MDBIcon far icon="clock" />
+                        <small className="ml-1">{data.remaining} hari lagi</small>
                     </div>
                 </div>
 
