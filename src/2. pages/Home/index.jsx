@@ -5,6 +5,7 @@ import '../../3. assets/styles/components.css';
 import Jumbotron from './Home-Components/Jumbotron';
 import Campaigns from './Home-Components/Campaign';
 import StartNow from './Home-Components/StartNow';
+// IMPORT COMPONENTS //
 
 class Homepage extends Component {
     componentDidMount() {
@@ -13,7 +14,7 @@ class Homepage extends Component {
     
     render() {
         return (
-            <div className='pb-5 background-home'>
+            <div className='pb-5 bg-home'>
 
                 <Jumbotron />
 

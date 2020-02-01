@@ -11,10 +11,20 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 // MDBREACT //
 
+// REDUX //
+import ReduxThunk from 'redux-thunk'
+import {Provider} from 'react-redux'
+import {createStore, applyMiddleware} from 'redux'
+import Reducers from './4. redux/reducers'
+const globalStore = createStore(Reducers, {}, applyMiddleware(ReduxThunk))
+// REDUX //
+
 ReactDOM.render(
-    <BrowserRouter>
-        <App />
-    </BrowserRouter>,
+    <Provider store={globalStore}>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </Provider>,
     document.getElementById('root')
 );
 
