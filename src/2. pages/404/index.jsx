@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
-import NotFound from '../../3. assets/img/page_notfound.svg';
+import { MDBAnimation, MDBBtn, MDBIcon } from 'mdbreact';
 
 class PageNotFound extends Component {
     render() {
         return (
-            <div className="d-flex align-items-center" style={{height:'100vh'}}>
-                <div className="col-md-6 offset-md-3">
-                    <img src={NotFound}
-                        alt="Page Not Found"
-                        className='img-responsive img-fluid mt-5'
-                    />
-                    <h2 className='text-center my-5'>Page Not Found</h2>
+            <div className="d-flex align-items-center bg-dark border-bottom" style={{height:'100vh'}}>
+                <div className="col-md-6 offset-md-3 text-white text-center">
+                    <MDBAnimation type="bounce" infinite>
+                        <h1>4 0 4</h1>
+                    </MDBAnimation>
+                    <h3 className='h3-responsive border rounded mx-sm-5 my-5 p-4'>
+                        Page Not Found
+                    </h3>
+                    <MDBBtn color="deep-purple" className="py-2 px-4" href="/">
+                        <MDBIcon icon="arrow-left" />
+                        <span className="ml-2">Back To Website</span>
+                    </MDBBtn>
                 </div>
             </div>
         );

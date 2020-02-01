@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import '../../3. assets/styles/components.css';
 
 // IMPORT COMPONENTS //
 import Jumbotron from './Home-Components/Jumbotron';
