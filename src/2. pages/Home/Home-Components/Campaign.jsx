@@ -45,17 +45,21 @@ class Campaign extends Component {
 
     render() {
         return (
-            <div className='container-fluid text-center py-5 border-bottom'>
+            <div className='container-fluid text-center py-5'>
+
                 <div className="col-md-6 offset-md-3 justify-content-center">
                     <h2 className="h2-responsive">CAMPAIGN TERBARU</h2>
                     <p className='opacity-80'>Yuk Temukan Kolaborasi Menarik Disini</p>
                 </div>
+
                 <div className="row my-4 justify-content-center">
                     {this.renderCampaignData()}
                 </div>
-                <MDBBtn outline color="indigo" className="rounded-pill">
+
+                <MDBBtn outline color="indigo" className="rounded-pill mb-4">
                     LIHAT SEMUA
                 </MDBBtn>
+
             </div>
         );
     }

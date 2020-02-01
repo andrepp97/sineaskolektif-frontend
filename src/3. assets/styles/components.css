@@ -1,10 +1,10 @@
 /* JUMBOTRON */
 .jumbotron-container {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 
-    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.96)),
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.975)),
     url('../img/bg-1.svg');
     background-size: cover;
     background-position: center;
@@ -19,10 +19,16 @@
 /* CAMPAIGN */
 .campaign-card {
     width: 20rem;
-    margin: 12px;
+    margin: 20px;
 
     transition: .25s ease-in-out;
 }
+
+.campaign-card img {
+    opacity: .85;
+    transition: .25s ease-in-out;
+}
+
 .campaign-card:hover {
     cursor: pointer;
     transform: scale(1.05);
@@ -30,6 +36,9 @@
     -webkit-box-shadow: 0px 0px 15px 0px rgb(95, 67, 218);
     -moz-box-shadow: 0px 0px 15px 0px rgb(95, 67, 218);
     box-shadow: 0px 0px 15px 0px rgb(95, 67, 218);
+}
+.campaign-card:hover > img {
+    opacity: 1;
 }
 
 .campaign-title {

@@ -13,10 +13,10 @@ const scrollToTop = () => {
 // MAIN COMPONENT
 const StartNow = () => {
     return (
-        <MDBContainer className='py-5 border-top'>
+        <MDBContainer className='py-5'>
             <div className="row text-center">
 
-                <MDBCol md="6" className='p-5'>
+                <MDBCol md="6" className='p-4'>
                     <h2 className='h2-responsive'>
                         Realisasikan Karya Terbaikmu Sekarang
                     </h2>
