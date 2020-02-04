@@ -17,6 +17,13 @@ class Homepage extends Component {
 
                 <Jumbotron />
 
+                {/* DIVIDER */}
+                <div className='container px-sm-5'>
+                    <hr className="my-0" />
+                    <hr className="my-0" />
+                </div>
+                {/* DIVIDER */}
+
                 <Campaigns />
 
                 {/* DIVIDER */}

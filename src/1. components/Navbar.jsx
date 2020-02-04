@@ -11,7 +11,11 @@ import {
 import { userLogout } from '../4. redux/actions';
 // Import Redux Actions //
 
-class NavbarPage extends Component {
+// Import Logo
+import Logo from '../3. assets/img/Logo.png'
+// Import Logo
+
+class Navbar extends Component {
     state = {
         isOpen: false
     };
@@ -29,13 +33,13 @@ class NavbarPage extends Component {
     render() {
         return (
             <MDBNavbar
-                color="indigo" expand="md"
+                color="white" expand="md"
                 fixed="top" className='px-5'
-                dark scrolling
+                light scrolling transparent
             >
                 <MDBNavbarBrand>
                     <Link to='/'>
-                        <strong className="white-text">LOGO</strong>
+                        <img src={Logo} alt="LOGO" height={30} />
                     </Link>
                 </MDBNavbarBrand>
                 <MDBNavbarToggler onClick={this.toggleCollapse} />
@@ -43,8 +47,8 @@ class NavbarPage extends Component {
                     <MDBNavbarNav left>
                         <MDBNavItem className='ml-2'>
                             <MDBDropdown>
-                                <MDBDropdownToggle nav caret>
-                                    <span className="mr-1 font-small">TELUSURI</span>
+                                <MDBDropdownToggle nav caret className="text-dark">
+                                    <span className="mr-1 font-small font-weight-bold">TELUSURI</span>
                                 </MDBDropdownToggle>
                                 <MDBDropdownMenu>
                                     <MDBDropdownItem href="#!">Menu 1</MDBDropdownItem>
@@ -74,7 +78,7 @@ class NavbarPage extends Component {
                             :
                                 <MDBNavItem>
                                     <MDBDropdown>
-                                        <MDBDropdownToggle nav className="d-flex align-items-center">
+                                        <MDBDropdownToggle nav className="d-flex align-items-center text-dark">
                                             <MDBIcon icon="user-circle" style={{fontSize:'24px'}} />
                                             <small className="ml-2">{this.props.username}</small>
                                         </MDBDropdownToggle>
@@ -104,4 +108,4 @@ const mapStateToProps = ({ userData }) => {
     return { ...userData }
 }
 
-export default connect(mapStateToProps, { userLogout })(NavbarPage);
+export default connect(mapStateToProps, { userLogout })(Navbar);
