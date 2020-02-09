@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import { MDBBtn, MDBIcon } from 'mdbreact';
+
+// REDUX
 import { connect } from 'react-redux';
-import { MDBBtn } from 'mdbreact';
+import { userSignup } from '../../4. redux/actions';
+// REDUX
 
 class Register extends Component {
     state = {
@@ -41,6 +45,8 @@ class Register extends Component {
         
         if (this.state.password === '') {
             passError = 'Please provide a password'
+        } else if (this.state.password.length < 6) {
+            passError = 'Password at least contains 6 characters'
         } else {
             passError = ''
             this.setState({ passError })
@@ -70,14 +76,14 @@ class Register extends Component {
     confirmUserRegister = () => {
         let userObj = {
             username: this.state.username,
-            email: this.state.email,
-            password: this.state.password
+            password: this.state.password,
+            email: this.state.email
         }
 
         const isValid = this.validateInput()
 
         if (isValid) {
-            alert(userObj)
+            this.props.userSignup(userObj)
         }
     }
 
@@ -86,17 +92,32 @@ class Register extends Component {
         this.validateInput()
         this.confirmUserRegister()
     }
-    
 
+    // Register saat user tekan ENTER //
+    onEnterRegister = (event) => {
+        if (event.key === 'Enter') {
+            this.onUserRegister()
+        }
+    }
+
+    
+    // MAIN RENDER
     render() {
+        if (this.props.success) {
+            return <Redirect to={`/EmailVerifying?email=${this.props.emailSuccess}`} />
+        }
+
         if (this.props.username) {
             return <Redirect to='/' />
         }
 
         return (
             <div className="py-5 overflow-hidden">
+
                 <div className="row justify-content-center align-items-center">
+
                     <div className="col-sm-8 col-md-6 mt-5 px-5">
+
                         <div className="card-auth p-4 p-md-5">
                             <p className="h3-responsive auth-header">DAFTAR</p>
                             <label htmlFor="userName" className="grey-text">
@@ -108,6 +129,7 @@ class Register extends Component {
                                 className="form-control"
                                 value={this.state.username}
                                 onChange={(e) => this.setState({ username: e.target.value })}
+                                onKeyUp={this.onEnterRegister}
                             />
                             <p className='text-danger font-small text-right'>{this.state.nameError}</p>
                             
@@ -120,6 +142,7 @@ class Register extends Component {
                                 className="form-control"
                                 value={this.state.email}
                                 onChange={(e) => this.setState({ email: e.target.value })}
+                                onKeyUp={this.onEnterRegister}
                             />
                             <p className='text-danger font-small text-right'>{this.state.emailError}</p>
                             
@@ -132,6 +155,7 @@ class Register extends Component {
                                 className="form-control"
                                 value={this.state.password}
                                 onChange={(e) => this.setState({ password: e.target.value })}
+                                onKeyUp={this.onEnterRegister}
                             />
                             <p className='text-danger font-small text-right'>{this.state.passError}</p>
                             
@@ -144,28 +168,41 @@ class Register extends Component {
                                 className="form-control"
                                 value={this.state.password2}
                                 onChange={(e) => this.setState({ password2: e.target.value })}
+                                onKeyUp={this.onEnterRegister}
                             />
                             <p className='text-danger font-small text-right'>{this.state.pass2Error}</p>
 
                             <div className="mt-5">
-                                <MDBBtn color="indigo" className="rounded btn-block" onClick={this.onUserRegister}>
-                                    <b>Buat Akun</b>
-                                </MDBBtn>
+                                {
+                                    this.props.isLoading
+                                    ?
+                                        <MDBBtn color="indigo" className="rounded btn-block" disabled>
+                                            <div className="spinner-border spinner-border-sm" role="status" />
+                                        </MDBBtn>
+                                    :
+                                        <MDBBtn color="indigo" className="rounded btn-block" onClick={this.onUserRegister}>
+                                            <MDBIcon icon="user-plus" />
+                                            <b className="ml-2">Buat Akun</b>
+                                        </MDBBtn>
+                                }
                             </div>
 
                             <p className="mt-4 text-center">
                                 Sudah terdaftar ? <Link to="/login">Masuk</Link>
                             </p>
                         </div>
+                        
                     </div>
+
                 </div>
+
             </div>
         );
     }
 }
 
-const mapStateToProps = ({ userData }) => {
-    return { ...userData }
+const mapStateToProps = ({ userData, regisData }) => {
+    return { ...userData, ...regisData }
 }
 
-export default connect(mapStateToProps)(Register)
+export default connect(mapStateToProps, { userSignup })(Register)

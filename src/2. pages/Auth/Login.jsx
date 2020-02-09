@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { MDBBtn } from 'mdbreact';
+import { MDBBtn, MDBIcon } from 'mdbreact';
 
 // Import User Actions //
 import { userLogin } from '../../4. redux/actions';
@@ -19,6 +19,7 @@ class Login extends Component {
     // LIFECYCLE //
     componentDidMount() {
         window.scrollTo(0, 0)
+        console.log(this.props)
     }
     // LIFECYCLE //
 
@@ -36,7 +37,7 @@ class Login extends Component {
         if (this.state.password === '') {
             passError = 'Please input your password'
         } else if (this.state.password.length < 6) {
-            passError = 'Password at least 6 characters'
+            passError = 'Password at least contains 6 characters'
         } else {
             passError = ''
             this.setState({ passError })
@@ -122,11 +123,20 @@ class Login extends Component {
                             <p id="txtError" className='text-danger font-small text-right animation bounceInUp'>
                                 {this.state.passError}
                             </p>
-                            
+
                             <div className="mt-5">
-                                <MDBBtn color="indigo" className="rounded btn-block" onClick={this.onUserLogin}>
-                                    <b>Masuk</b>
-                                </MDBBtn>
+                            {
+                                this.props.isLoading
+                                ?
+                                    <MDBBtn color="indigo" className="rounded btn-block" disabled>
+                                        <div className="spinner-border spinner-border-sm" role="status" />
+                                    </MDBBtn>
+                                :
+                                    <MDBBtn color="indigo" className="rounded btn-block" onClick={this.onUserLogin}>
+                                        <MDBIcon icon="sign-in-alt" />
+                                        <b className="ml-2">Masuk</b>
+                                    </MDBBtn>
+                            }
                             </div>
 
                             <p className="mt-4 text-center">
