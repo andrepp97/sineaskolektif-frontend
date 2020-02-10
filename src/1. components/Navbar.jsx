@@ -70,7 +70,7 @@ class Navbar extends Component {
                                         </MDBBtn>
                                     </Link>
                                     <Link to='/register'>
-                                        <MDBBtn color='elegant' className='rounded px-3 py-1'>
+                                        <MDBBtn color='indigo' className='rounded px-3 py-1'>
                                             Daftar
                                         </MDBBtn>
                                     </Link>
