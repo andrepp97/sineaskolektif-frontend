@@ -8,7 +8,6 @@ import Axios from "axios";
 import {urlAPI} from "../../5. helper/database";
 
 export const confirmLogin = (user) => {
-    // console.log(user)
     return {
         type: LOGIN_SUCCESS,
         payload: user

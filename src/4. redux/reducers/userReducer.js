@@ -1,6 +1,8 @@
 import {
     LOGIN_SUCCESS,
-    USER_LOGOUT
+    USER_LOGOUT,
+    IS_LOADING,
+    NOT_LOADING
 } from '../types';
 
 const INITIAL_STATE = {
@@ -21,6 +23,10 @@ export default (state = INITIAL_STATE, action) => {
                 username: action.payload.username,
                 role: action.payload.role
             }
+        case IS_LOADING:
+            return {...state, isLoading: true}
+        case NOT_LOADING:
+            return {...state, isLoading: false}
         case USER_LOGOUT:
             return INITIAL_STATE
         default:
