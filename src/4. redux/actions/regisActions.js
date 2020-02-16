@@ -26,13 +26,16 @@ export const userSignup = (regisObj) => {
         }).catch((err) => {
             let msg = err.response.data
             if (msg === 'duplicate') {
-                alert('Email sudah digunakan, gunakan email yang lain.')
+                dispatch({
+                    type: REGISTER_FAILED,
+                    payload: 'Email sudah digunakan!'
+                })
             } else {
-                alert('Server tidak merespon. Silahkan coba lagi nanti.')
+                dispatch({
+                    type: REGISTER_FAILED,
+                    payload: 'Server tidak merespon, coba lagi nanti.'
+                })
             }
-            dispatch({
-                type: REGISTER_FAILED
-            })
         })
     }
 }

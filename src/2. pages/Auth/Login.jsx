@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { MDBBtn, MDBIcon } from 'mdbreact';
+import { MDBBtn, MDBIcon, MDBAlert } from 'mdbreact';
 
 // Import User Actions //
 import { userLogin } from '../../4. redux/actions';
@@ -88,12 +88,22 @@ class Login extends Component {
         }
 
         return (
-            <div className="page-container">
+            <div className="page-container bg-auth">
                 <div className="row justify-content-center align-items-center" style={{height:'100vh'}}>
                     <div className="col-sm-8 col-md-6 mt-5 px-5">
-                        <div className="card-auth p-4 p-md-5">
+                        <div className="card-auth p-4 px-md-5">
 
                             <p className="h3-responsive auth-header">MASUK</p>
+
+                            {
+                                this.props.authError
+                                ?
+                                    <MDBAlert color="danger" className="text-center hoverable">
+                                        {this.props.authError}
+                                    </MDBAlert>
+                                :
+                                    null
+                            }
 
                             <label htmlFor="userEmail">
                                 Email Anda
@@ -104,8 +114,9 @@ class Login extends Component {
                                 className="form-control"
                                 value={this.state.email}
                                 onChange={(e) => this.setState({ email: e.target.value })}
+                                onKeyUp={this.onUserLoginEnter}
                             />
-                            <p id="txtError" className='text-danger font-small text-right animation bounceIn'>
+                            <p className='text-danger font-small text-right animation bounceIn'>
                                 {this.state.emailError}
                             </p>
                             
@@ -120,11 +131,11 @@ class Login extends Component {
                                 onChange={(e) => this.setState({ password: e.target.value })}
                                 onKeyUp={this.onUserLoginEnter}
                             />
-                            <p id="txtError" className='text-danger font-small text-right animation bounceInUp'>
+                            <p className='text-danger font-small text-right animation bounceInUp'>
                                 {this.state.passError}
                             </p>
 
-                            <div className="mt-5">
+                            <div className="mt-4">
                             {
                                 this.props.isLoading
                                 ?

@@ -2,7 +2,8 @@ import {
     LOGIN_SUCCESS,
     USER_LOGOUT,
     IS_LOADING,
-    NOT_LOADING
+    NOT_LOADING,
+    LOGIN_ERROR
 } from '../types';
 import Axios from "axios";
 import {urlAPI} from "../../5. helper/database";
@@ -40,9 +41,20 @@ export const userLogin = (userObject) => {
                     type: NOT_LOADING
                 })
                 if (err.response.data === 'NoResult') {
-                    alert('Email tidak terdaftar!')
+                    dispatch({
+                        type: LOGIN_ERROR,
+                        payload: 'Email tidak terdaftar!'
+                    })
+                } else if (err.response.data === 'WrongPass') {
+                    dispatch({
+                        type: LOGIN_ERROR,
+                        payload: 'Password anda salah!'
+                    })
                 } else {
-                    alert('Server tidak merespon, Coba lagi nanti.')
+                    dispatch({
+                        type: LOGIN_ERROR,
+                        payload: 'Server tidak merespon, coba lagi nanti.'
+                    })
                 }
             })
     }

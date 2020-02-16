@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import { MDBBtn, MDBIcon } from 'mdbreact';
+import { MDBBtn, MDBIcon, MDBAlert } from 'mdbreact';
 
 // REDUX
 import { connect } from 'react-redux';
@@ -112,14 +112,26 @@ class Register extends Component {
         }
 
         return (
-            <div className="py-5 overflow-hidden">
+            <div className="page-container bg-auth py-5">
 
                 <div className="row justify-content-center align-items-center">
 
                     <div className="col-sm-8 col-md-6 mt-5 px-5">
 
-                        <div className="card-auth p-4 p-md-5">
+                        <div className="card-auth p-4 px-md-5">
+
                             <p className="h3-responsive auth-header">DAFTAR</p>
+
+                            {
+                                this.props.regError
+                                ?
+                                    <MDBAlert color="danger" className="text-center hoverable">
+                                        {this.props.regError}
+                                    </MDBAlert>
+                                :
+                                    null
+                            }
+
                             <label htmlFor="userName" className="grey-text">
                                 Username
                             </label>
@@ -172,7 +184,7 @@ class Register extends Component {
                             />
                             <p className='text-danger font-small text-right'>{this.state.pass2Error}</p>
 
-                            <div className="mt-5">
+                            <div className="mt-4">
                                 {
                                     this.props.isLoading
                                     ?
@@ -190,6 +202,7 @@ class Register extends Component {
                             <p className="mt-4 text-center">
                                 Sudah terdaftar ? <Link to="/login">Masuk</Link>
                             </p>
+
                         </div>
                         
                     </div>

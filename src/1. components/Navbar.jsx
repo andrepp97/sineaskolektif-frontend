@@ -35,7 +35,7 @@ class Navbar extends Component {
             <MDBNavbar
                 color="white" expand="md"
                 fixed="top" className='px-5'
-                light scrolling transparent
+                light scrolling
             >
                 <MDBNavbarBrand>
                     <Link to='/'>

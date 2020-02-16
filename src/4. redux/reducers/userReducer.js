@@ -2,7 +2,8 @@ import {
     LOGIN_SUCCESS,
     USER_LOGOUT,
     IS_LOADING,
-    NOT_LOADING
+    NOT_LOADING,
+    LOGIN_ERROR
 } from '../types';
 
 const INITIAL_STATE = {
@@ -10,7 +11,8 @@ const INITIAL_STATE = {
     email: '',
     username: '',
     role: '',
-    isLoading: false
+    isLoading: false,
+    authError: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -23,6 +25,8 @@ export default (state = INITIAL_STATE, action) => {
                 username: action.payload.username,
                 role: action.payload.role
             }
+        case LOGIN_ERROR:
+            return {...state, authError: action.payload}
         case IS_LOADING:
             return {...state, isLoading: true}
         case NOT_LOADING:

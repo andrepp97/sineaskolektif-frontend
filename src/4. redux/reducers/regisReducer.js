@@ -7,6 +7,7 @@ import {
 
 const INITIAL_STATE = {
     success: false,
+    regError: '',
     emailSuccess: '',
     isLoading: false
 }
@@ -18,15 +19,19 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state, isLoading: true
             }
-            case REGISTER_FAILED:
-                return {
-                    ...state, isLoading: false
-                }
-                case REGISTER_SUCCESS:
-                    return {
-                        ...INITIAL_STATE, success: true, emailSuccess: action.payload
-                    }
-                    default:
-                        return state
+        case REGISTER_FAILED:
+            return {
+                ...state,
+                isLoading: false,
+                regError: action.payload
+            }
+        case REGISTER_SUCCESS:
+            return {
+                ...INITIAL_STATE,
+                success: true,
+                emailSuccess: action.payload
+            }
+        default:
+            return state
     }
 }
