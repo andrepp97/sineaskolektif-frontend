@@ -19,7 +19,6 @@ class Login extends Component {
     // LIFECYCLE //
     componentDidMount() {
         window.scrollTo(0, 0)
-        console.log(this.props)
     }
     // LIFECYCLE //
 
