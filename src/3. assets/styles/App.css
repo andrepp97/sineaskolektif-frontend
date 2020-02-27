@@ -10,6 +10,11 @@ html {
 
 
 /* GENERAL */
+.page-padding {
+    padding: 100px 0px;
+    min-height: calc(100vh - 10em);
+}
+
 .bg-home {
     background-color: #f7f7f7;
 }

@@ -19,6 +19,7 @@ import Login from './2. pages/Auth/Login';
 import Register from './2. pages/Auth/Register';
 import EmailVerifying from './2. pages/EmailVerifying';
 import EmailVerified from './2. pages/EmailVerified';
+import BuatCampaign from './2. pages/Campaign/buatCampaign';
 import PageNotFound from './2. pages/404';
 import Footer from './1. components/Footer';
 // COMPONENTS & PAGES //
@@ -42,6 +43,7 @@ class App extends Component {
           <Route path='/register' exact component={Register} />
           <Route path='/EmailVerifying' exact component={EmailVerifying} />
           <Route path='/EmailVerified' exact component={EmailVerified} />
+          <Route path='/buat-campaign' exact component={BuatCampaign} />
           <Route path='*' component={PageNotFound} />
         </Switch>
 

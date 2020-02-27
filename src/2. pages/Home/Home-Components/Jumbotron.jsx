@@ -1,20 +1,10 @@
 import React from "react";
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import JumboBG from '../../../3. assets/img/jumbotron.svg';
-// import { MDBJumbotron, MDBContainer, MDBBtn } from "mdbreact";
 
-const JumbotronPage = () => {
+const JumbotronPage = (props) => {
     return (
-        // <MDBJumbotron className='jumbotron-container' style={{height:'100vh'}}>
-        //     <MDBContainer className='text-center white-text'>
-        //         <h1 className='mb-5 h1-responsive'>
-        //             Bikin Impresi, Bukan Frustasi
-        //         </h1>
-        //         <MDBBtn color='indigo' className='jumbotron-btn rounded-pill px-5 py-3'>
-        //             Buat Campaign
-        //         </MDBBtn>
-        //     </MDBContainer>
-        // </MDBJumbotron>
-
         <div id="jumbotron">
             <div className="container d-flex h-100">
                 <div className="row justify-content-center align-items-center">
@@ -22,14 +12,30 @@ const JumbotronPage = () => {
                         <img src={JumboBG} alt="" className="img-fluid" />
                     </div>
                     <div className="col-md-6 py-5 order-md-first">
-                        <div className="vertical-center">
-                            <h2 className="h2-responsive text-center text-md-left mb-4" style={{ color:'#3F51B5' }}>
-                                Work Smarter, Not Harder
-                            </h2>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum ab sit eaque exercitationem dicta iste dolorem incidunt ratione corrupti.
-                            </p>
-                        </div>
+                        {
+                            props.username
+                            ?
+                                <div className="text-center">
+                                    <Link to='/buat-campaign' className="btn btn-indigo">
+                                        Buat Campaign
+                                    </Link>
+                                    <Link to='/buat-polling' className="btn btn-outline-elegant">
+                                        Buat Polling
+                                    </Link>
+                                    <p className="mt-4">
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore labore aperiam dolores error, in amet quaerat natus ab vero voluptates consequuntur.
+                                    </p>
+                                </div>
+                            :
+                                <div>
+                                    <h2 className="h2-responsive text-center text-md-left mb-4" style={{ color:'#3F51B5' }}>
+                                        Work Smarter, Not Harder
+                                    </h2>
+                                    <p>
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum ab sit eaque exercitationem dicta iste dolorem incidunt ratione corrupti.
+                                    </p>
+                                </div>
+                        }
                     </div>
                 </div>
             </div>
@@ -37,4 +43,8 @@ const JumbotronPage = () => {
     )
 }
 
-export default JumbotronPage;
+const mapStateToProps = ({userData}) => {
+    return {...userData}
+}
+
+export default connect(mapStateToProps)(JumbotronPage);
