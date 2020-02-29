@@ -10,11 +10,11 @@ class PageNotFound extends Component {
                         <h1>4 0 4</h1>
                     </MDBAnimation>
                     <h3 className='h3-responsive border rounded mx-sm-5 my-5 p-4'>
-                        Page Not Found
+                        Halaman Tidak Ditemukan
                     </h3>
-                    <MDBBtn color="deep-purple" className="py-2 px-4" href="/">
+                    <MDBBtn color="indigo" className="rounded-pill py-2 px-4" href="/">
                         <MDBIcon icon="arrow-left" />
-                        <span className="ml-2">Back To Website</span>
+                        <span className="ml-2">Kembali ke Website</span>
                     </MDBBtn>
                 </div>
             </div>

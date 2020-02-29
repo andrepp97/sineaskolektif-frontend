@@ -8,7 +8,7 @@ const JumbotronPage = (props) => {
         <div id="jumbotron">
             <div className="container d-flex h-100">
                 <div className="row justify-content-center align-items-center">
-                    <div className="col-md-6 order-md-last mt-4 mt-md-0">
+                    <div className="col-md-6 order-md-last mt-5 mt-md-0">
                         <img src={JumboBG} alt="" className="img-fluid" />
                     </div>
                     <div className="col-md-6 py-5 order-md-first">

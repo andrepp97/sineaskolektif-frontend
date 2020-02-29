@@ -12,27 +12,31 @@ const INITIAL_STATE = {
     username: '',
     role: '',
     isLoading: false,
-    authError: ''
+    isLogin: false,
+    authError: '',
+    loadChecker: false
 };
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case LOGIN_SUCCESS:
             return {
-                ...INITIAL_STATE,
+                ...state,
                 id: action.payload.id,
                 email: action.payload.email,
                 username: action.payload.username,
-                role: action.payload.role
+                role: action.payload.role,
+                isLogin: true,
+                loadChecker: true
             }
         case LOGIN_ERROR:
-            return {...state, authError: action.payload}
+            return {...state, authError: action.payload, loadChecker: true}
         case IS_LOADING:
-            return {...state, isLoading: true}
+            return {...state, isLoading: true, loadChecker: true}
         case NOT_LOADING:
-            return {...state, isLoading: false}
+            return {...state, isLoading: false, loadChecker: true}
         case USER_LOGOUT:
-            return INITIAL_STATE
+            return {...INITIAL_STATE, loadChecker: true}
         default:
             return state
     }

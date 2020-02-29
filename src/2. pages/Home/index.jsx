@@ -1,16 +1,38 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
+
+// HELPER
+import { urlAPI } from '../../5. helper/database';
 
 // IMPORT COMPONENTS //
 import Jumbotron from './Home-Components/Jumbotron';
 import Campaigns from './Home-Components/Campaign';
 import StartNow from './Home-Components/StartNow';
-// IMPORT COMPONENTS //
 
 class Homepage extends Component {
-    componentDidMount() {
-        window.scrollTo(0, 0)
+    state = {
+        campaignData: []
     }
+
+    // GET DATA
+    getNewCampaigns = () => {
+        Axios.get(urlAPI + '/campaign/getNewCampaign')
+            .then(res => {
+                this.setState({ campaignData: res.data })
+            })
+            .catch(err => {
+                console.log(err.response)
+            })
+    }
+
+
+    // LIFECYCLE
+    componentDidMount() {
+        this.getNewCampaigns()
+    }
+
     
+    // MAIN RENDER
     render() {
         return (
             <div className='pb-5 bg-home'>
@@ -24,7 +46,7 @@ class Homepage extends Component {
                 </div>
                 {/* DIVIDER */}
 
-                <Campaigns />
+                <Campaigns data={this.state.campaignData} />
 
                 {/* DIVIDER */}
                 <div className='container px-sm-5'>

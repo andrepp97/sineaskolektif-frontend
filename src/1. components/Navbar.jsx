@@ -1,19 +1,17 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import {
     MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem,
     MDBNavbarToggler, MDBCollapse, MDBBtn, MDBIcon,
     MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem
 } from "mdbreact";
 
-// Import Redux Actions //
+// REDUX //
+import { connect } from 'react-redux';
 import { userLogout } from '../4. redux/actions';
-// Import Redux Actions //
 
-// Import Logo
+// LOGO
 import Logo from '../3. assets/img/Logo.png'
-// Import Logo
 
 class Navbar extends Component {
     state = {
@@ -35,7 +33,7 @@ class Navbar extends Component {
             <MDBNavbar
                 color="white" expand="md"
                 fixed="top" className='px-5'
-                light scrolling
+                light scrolling transparent
             >
                 <MDBNavbarBrand>
                     <Link to='/'>

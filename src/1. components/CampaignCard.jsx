@@ -1,5 +1,7 @@
 import React from 'react';
-import { MDBIcon, MDBProgress  } from 'mdbreact';
+import moment from 'moment';
+import { MDBIcon, MDBProgress } from 'mdbreact';
+import { urlAPI } from '../5. helper/database';
 
 const CampaignCard = ({data}) => {
     return (
@@ -7,7 +9,7 @@ const CampaignCard = ({data}) => {
 
             <img
                 className="img-fluid card-img-top"
-                src={data.image}
+                src={urlAPI + data.image}
                 alt={data.title}
             />
 
@@ -16,24 +18,30 @@ const CampaignCard = ({data}) => {
                     {data.title}
                 </p>
                 <span>
-                    {data.desc}
+                    {data.description}
                 </span>
             </div>
 
-            <div className="card-footer">
+            <div className="card-footer pb-0">
                 <div className="row">
-                    <div className="col-6 d-flex align-items-center">
-                        <MDBIcon far icon="user-circle" />
-                        <small className="font-weight-bold ml-1">{data.user}</small>
-                    </div>
-                    <div className="col-6 d-flex align-items-center justify-content-end">
-                        <MDBIcon far icon="clock" />
-                        <small className="ml-1">{data.remaining} hari lagi</small>
+                    <div className="col-12 d-flex justify-content-between">
+                        <div className="d-flex align-items-center">
+                            <MDBIcon far icon="user-circle" />
+                            <small className="font-weight-bold ml-1">
+                                {data.username}
+                            </small>
+                        </div>
+                        <div className="d-flex align-items-center">
+                            <MDBIcon far icon="clock" />
+                            <small className="font-weight-bold ml-1" style={{ fontSize:'11px' }}>
+                                ends {moment(data.end_date, "YYYYMMDD").fromNow()}
+                            </small>
+                        </div>
                     </div>
                 </div>
 
-                <MDBProgress value={data.progress} className="mt-3 mb-1" />
-                <p><b>{data.progress}%</b> Tercapai</p>
+                <MDBProgress value={0} className="mt-3 mb-1" />
+                <p><b>0%</b> Tercapai</p>
             </div>
         </div>
     );
