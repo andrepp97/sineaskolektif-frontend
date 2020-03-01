@@ -11,6 +11,7 @@ const INITIAL_STATE = {
     email: '',
     username: '',
     role: '',
+    created: '',
     isLoading: false,
     isLogin: false,
     authError: '',
@@ -26,6 +27,7 @@ export default (state = INITIAL_STATE, action) => {
                 email: action.payload.email,
                 username: action.payload.username,
                 role: action.payload.role,
+                created: action.payload.created,
                 isLogin: true,
                 loadChecker: true
             }

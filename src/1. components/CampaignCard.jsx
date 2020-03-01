@@ -1,11 +1,7 @@
 import React from 'react';
+import moment from 'moment';
 import { MDBIcon, MDBProgress } from 'mdbreact';
 import { urlAPI } from '../5. helper/database';
-
-// MOMENT
-import moment from 'moment';
-import 'moment/locale/id';
-moment.locale('id');
 
 const CampaignCard = ({data}) => {
     return (

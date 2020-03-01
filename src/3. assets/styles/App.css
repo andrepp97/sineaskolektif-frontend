@@ -15,6 +15,10 @@ html {
     min-height: calc(100vh - 10em);
 }
 
+.minheight50 {
+    min-height: 50vh;
+}
+
 .bg-home {
     background-color: #f7f7f7;
 }

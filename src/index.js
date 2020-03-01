@@ -16,8 +16,13 @@ import ReduxThunk from 'redux-thunk'
 import {Provider} from 'react-redux'
 import {createStore, applyMiddleware} from 'redux'
 import Reducers from './4. redux/reducers'
+
+// MOMENT
+import moment from 'moment';
+import 'moment/locale/id';
+
+moment.locale('id');
 const globalStore = createStore(Reducers, {}, applyMiddleware(ReduxThunk))
-// REDUX //
 
 ReactDOM.render(
     <Provider store={globalStore}>

@@ -32,7 +32,8 @@ export const userLogin = (userObject) => {
                         id: res.data.id,
                         username: res.data.username,
                         email: res.data.email,
-                        role: res.data.role
+                        role: res.data.role,
+                        created: res.data.created_date
                     }
                 })
             })
@@ -76,7 +77,8 @@ export const keepLogin = (token) => {
                         id: res.data.id,
                         username: res.data.username,
                         email: res.data.email,
-                        role: res.data.role
+                        role: res.data.role,
+                        created: res.data.created_date
                     }
                 })
             })

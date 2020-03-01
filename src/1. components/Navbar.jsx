@@ -11,12 +11,13 @@ import { connect } from 'react-redux';
 import { userLogout } from '../4. redux/actions';
 
 // LOGO
-import Logo from '../3. assets/img/Logo.png'
+import Logo from '../3. assets/img/Logo_white.png'
 
 class Navbar extends Component {
     state = {
         isOpen: false
-    };
+    }
+
 
     // FUNCTIONS //
     toggleCollapse = () => {
@@ -28,6 +29,8 @@ class Navbar extends Component {
     }
     // FUNCTIONS //
 
+
+    // MAIN RENDER
     render() {
         return (
             <MDBNavbar
@@ -80,12 +83,14 @@ class Navbar extends Component {
                                             <small className="ml-2">{this.props.username}</small>
                                         </MDBDropdownToggle>
                                         <MDBDropdownMenu>
-                                            <div className="text-center grey-text px-2 mb-3">
+                                            <div className="text-center grey-text mb-3 px-3">
                                                 <small>{this.props.email}</small>
                                             </div>
-                                            <MDBDropdownItem>
-                                                <MDBIcon icon="tachometer-alt" className="mr-2" />Dashboard
-                                            </MDBDropdownItem>
+                                            <Link to='/user/dashboard' className="p-0 text-decoration-none">
+                                                <MDBDropdownItem>
+                                                        <MDBIcon icon="tachometer-alt" className="mr-2" />Dashboard
+                                                </MDBDropdownItem>
+                                            </Link>
                                             <hr className="my-2" />
                                             <MDBDropdownItem onClick={this.onUserLogout}>
                                                 <MDBIcon icon="sign-out-alt" className="mr-2" />Logout
