@@ -1,7 +1,11 @@
 import React from 'react';
-import moment from 'moment';
 import { MDBIcon, MDBProgress } from 'mdbreact';
 import { urlAPI } from '../5. helper/database';
+
+// MOMENT
+import moment from 'moment';
+import 'moment/locale/id';
+moment.locale('id');
 
 const CampaignCard = ({data}) => {
     return (
@@ -14,30 +18,27 @@ const CampaignCard = ({data}) => {
             />
 
             <div className="card-body text-left">
-                <p className="h5-responsive campaign-title">
+                <h5 className="h5-responsive campaign-title">
                     {data.title}
-                </p>
-                <span>
+                </h5>
+                <span className="font-small">
                     {data.description}
                 </span>
             </div>
 
             <div className="card-footer pb-0">
-                <div className="row">
-                    <div className="col-12 d-flex justify-content-between">
-                        <div className="d-flex align-items-center">
-                            <MDBIcon far icon="user-circle" />
-                            <small className="font-weight-bold ml-1">
-                                {data.username}
-                            </small>
-                        </div>
-                        <div className="d-flex align-items-center">
-                            <MDBIcon far icon="clock" />
-                            <small className="font-weight-bold ml-1" style={{ fontSize:'11px' }}>
-                                ends {moment(data.end_date, "YYYYMMDD").fromNow()}
-                            </small>
-                        </div>
-                    </div>
+
+                <div className="d-flex align-items-center mb-2">
+                    <MDBIcon far icon="user-circle" />
+                    <small className="font-weight-bold ml-1" style={{ fontSize: '11px' }}>
+                        {data.username}
+                    </small>
+                </div>
+                <div className="d-flex align-items-center mb-2">
+                    <MDBIcon far icon="clock" />
+                    <small className="font-weight-bold ml-1" style={{ fontSize: '11px' }}>
+                        berakhir {moment(data.end_date, "YYYYMMDD").fromNow()}
+                    </small>
                 </div>
 
                 <MDBProgress value={0} className="mt-3 mb-1" />
