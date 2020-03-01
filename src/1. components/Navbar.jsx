@@ -31,21 +31,20 @@ class Navbar extends Component {
     render() {
         return (
             <MDBNavbar
-                color="white" expand="md"
-                fixed="top" className='px-5'
-                light scrolling transparent
+                color="indigo" expand="md" dark
+                fixed="top" className='px-5 py-1'
             >
                 <MDBNavbarBrand>
-                    <Link to='/'>
-                        <img src={Logo} alt="LOGO" height={30} />
-                    </Link>
+                    <a href='/'>
+                        <img src={Logo} alt="LOGO" height={31} />
+                    </a>
                 </MDBNavbarBrand>
                 <MDBNavbarToggler onClick={this.toggleCollapse} />
                 <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
                     <MDBNavbarNav left>
                         <MDBNavItem className='ml-2'>
                             <MDBDropdown>
-                                <MDBDropdownToggle nav caret className="text-dark">
+                                <MDBDropdownToggle nav caret>
                                     <span className="mr-1 font-small font-weight-bold">TELUSURI</span>
                                 </MDBDropdownToggle>
                                 <MDBDropdownMenu>
@@ -76,8 +75,8 @@ class Navbar extends Component {
                             :
                                 <MDBNavItem>
                                     <MDBDropdown>
-                                        <MDBDropdownToggle nav className="d-flex align-items-center text-dark">
-                                            <MDBIcon icon="user-circle" style={{fontSize:'24px'}} />
+                                        <MDBDropdownToggle nav className="d-flex align-items-center">
+                                            <MDBIcon icon="user-circle" style={{fontSize:'22px'}} />
                                             <small className="ml-2">{this.props.username}</small>
                                         </MDBDropdownToggle>
                                         <MDBDropdownMenu>

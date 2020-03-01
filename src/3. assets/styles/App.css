@@ -11,7 +11,7 @@ html {
 
 /* GENERAL */
 .page-padding {
-    padding: 100px 0px;
+    padding: 80px 0px;
     min-height: calc(100vh - 10em);
 }
 

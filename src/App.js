@@ -30,6 +30,7 @@ import Register from './2. pages/Auth/Register';
 import EmailVerifying from './2. pages/EmailVerifying';
 import EmailVerified from './2. pages/EmailVerified';
 import BuatCampaign from './2. pages/Campaign/buatCampaign';
+import Dashboard from './2. pages/Dashboard';
 import PageNotFound from './2. pages/404';
 // PAGES //
 
@@ -67,6 +68,7 @@ class App extends Component {
           <Route path='/EmailVerifying' exact component={EmailVerifying} />
           <Route path='/EmailVerified' exact component={EmailVerified} />
           <Route path='/buat-campaign' exact component={BuatCampaign} />
+          <Route path='/dashboard' exact component={Dashboard} />
           <Route path='*' component={PageNotFound} />
         </Switch>
 
