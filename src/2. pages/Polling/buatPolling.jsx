@@ -1,9 +1,10 @@
+/* eslint-disable no-labels */
 import React, { Component } from 'react';
 import Axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
-import { MDBCol, MDBInputGroup, MDBInput, MDBBtn, MDBIcon } from 'mdbreact';
+import { MDBCol, MDBInputGroup, MDBInput, MDBBtn, MDBIcon, MDBAnimation } from 'mdbreact';
 
 // HELPER
 import { urlAPI } from '../../5. helper/database';
@@ -14,12 +15,18 @@ class BuatPolling extends Component {
         agree: false,
         errorText: '',
         isLoading: false,
+        dummy: false,
 
         // POLLING DATA
         pollingTitle: '',
         pollingDesc: '',
-        questions: [1],
-        options: [1],
+        questions: [
+            {
+                id: 1,
+                question: '',
+                options: ['']
+            }
+        ],
         start: '',
         end: '',
         files: null
@@ -30,74 +37,102 @@ class BuatPolling extends Component {
     renderQuestions = () => {
         return this.state.questions.map((val,idx) => {
             return (
-                <div key={idx} className="card mb-3">
-                    <div className="card-body">
-                        <MDBInputGroup
-                            hint={`Pertanyaan ${idx + 1}`}
-                            prepend={<h4 className="px-2 h4-responsive">{idx + 1}</h4>}
-                            append={<MDBBtn color="red" className="px-2 py-1" onClick={() => this.removeQuestion(val)}><MDBIcon icon="times" /></MDBBtn>}
-                        />
-                        <ul className="mt-2">
-                            {this.renderOptions()}
-                            <MDBBtn color="indigo" className="px-2 py-1 rounded-pill" onClick={this.addOption}>
-                                <MDBIcon icon="plus" /> Pilihan
-                            </MDBBtn>
-                        </ul>
+                <MDBAnimation type="slideInLeft" key={idx}>
+                    <div className="card mb-3">
+                        <div className="card-body">
+                            <MDBInputGroup
+                                hint={`Pertanyaan ${idx + 1}`}
+                                prepend={<h4 className="px-2 h4-responsive">{idx + 1}</h4>}
+                                append={<MDBBtn color="red" className="px-2 py-1" onClick={() => this.removeQuestion(val.id)}><MDBIcon icon="times" /></MDBBtn>}
+                            />
+                            <ul className="mt-2 mb-0">
+                                {
+                                    val.options.map((option,idxOption) => {
+                                        return (
+                                            <MDBAnimation type="fadeIn" key={idxOption}>
+                                                <li className="my-1">
+                                                    <MDBInputGroup
+                                                        hint={`Pilihan ${idxOption + 1}`}
+                                                        append={<MDBBtn color="transparent" className="px-2 py-1" onClick={() => this.removeOption(idx, idxOption)}>
+                                                                    <MDBIcon icon="times" />
+                                                                </MDBBtn>}
+                                                    />
+                                                </li>
+                                            </MDBAnimation>
+                                        )
+                                    })
+                                }
+                                <MDBBtn color="indigo" className="px-2 py-1 rounded-pill" onClick={() => this.addOption(idx)}>
+                                    <MDBIcon icon="plus" /> Pilihan
+                                </MDBBtn>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            )
-        })
-    }
-
-    renderOptions = () => {
-        return this.state.options.map((val,idx) => {
-            return (
-                <li key={idx} className="my-1">
-                    <MDBInputGroup
-                        hint={`Pilihan ${idx + 1}`}
-                        append={<MDBBtn color="red" className="px-2 py-1" onClick={() => this.removeOption(val)}><MDBIcon icon="times" /></MDBBtn>}
-                    />
-                </li>
+                </MDBAnimation>
             )
         })
     }
     // RENDERS
 
 
-    // ADD QUESTION
+    // QUESTIONS
     addQuestion = () => {
-        let newQuestions = this.state.questions
-        if (newQuestions.length < 5) {
-            newQuestions.push(newQuestions.length + 1)
-            this.setState({ questions: newQuestions })
+        let currentQuestions = this.state.questions
+        if (currentQuestions.length < 5) {
+            currentQuestions.push({ 
+                id: currentQuestions[currentQuestions.length-1].id + 1,
+                question: '',
+                options: ['']
+             })
+             this.setState({ questions: currentQuestions })
+             window.scrollTo(0, window.innerHeight)
         } else {
-            toast.error('Pertanyaan maksimal hanya 5')
+            toast.error('Polling dibatasi hingga 5 pertanyaan')
         }
     }
-    // ADD QUESTION
 
-    // ADD OPTION
-    addOption = () => {
-        let newOptions = this.state.options
-        newOptions.push(newOptions.length + 1)
-        this.setState({ options: newOptions })
-    }
+    removeQuestion = (id) => {
+        var newQuestions = []
+        let currentQuestions = this.state.questions
 
-    // REMOVE QUESTION
-    removeQuestion = (idx) => {
-        let newQuestions = this.state.questions
-        newQuestions = newQuestions.filter(val => parseInt(val) !== parseInt(idx))
+        currentQuestions.forEach((question,idx) => {
+            if (id !== question.id) {
+                newQuestions.push(question)
+            }
+        })
+        
         this.setState({ questions: newQuestions })
     }
-    // REMOVE QUESTION
+    // QUESTIONS
 
-    // REMOVE OPTION
-    removeOption = (idx) => {
-        let newOptions = this.state.options
-        newOptions = newOptions.filter(val => parseInt(val) !== parseInt(idx))
-        this.setState({ options: newOptions })
+
+    // OPTIONS
+    addOption = (idxQuestion) => {
+        let newOptions = this.state.questions[idxQuestion].options
+        if (newOptions.length < 5) {
+            newOptions.push('')
+            this.state.questions.forEach((question,idx) => {
+                if (idx === idxQuestion) {
+                    question.options = newOptions
+                }
+                this.setState({dummy: true})
+            })
+        } else {
+            toast.error('Pilihan dari pertanyaan dibatasi hingga 5 pilihan')
+        }
     }
-    // REMOVE OPTION
+
+    removeOption = (idxQuestion, idxOption) => {
+        let newOptions = this.state.questions[idxQuestion].options
+        newOptions = newOptions.filter((option,idx) => parseInt(idx) !== parseInt(idxOption))
+        this.state.questions.forEach((question, index) => {
+            if (index === idxQuestion) {
+                question.options = newOptions
+            }
+            this.setState({dummy: true})
+        })
+    }
+    // OPTIONS
 
 
     // MAIN RENDER
@@ -114,35 +149,39 @@ class BuatPolling extends Component {
 
                                 <h2 className="h2-responsive">Buat Polling</h2>
 
-                                <div id="polling-top" className="card px-4 my-3">
-                                    <div className="form-group mt-2 mb-0">
-                                        <MDBInput
-                                            outline
-                                            type="text"
-                                            label="Judul Polling"
-                                            className="shadow-sm font-weight-bold h5-responsive"
-                                            onChange={(e) => this.setState({ pollingTitle: e.target.value })}
-                                            value={this.state.pollingTitle}
-                                        />
-                                        <MDBInput
-                                            outline
-                                            type="textarea"
-                                            className="shadow-sm"
-                                            label="Deskripsi Polling"
-                                            onChange={(e) => this.setState({ pollingDesc: e.target.value })}
-                                            value={this.state.pollingDesc}
-                                        />
+                                <MDBAnimation type="fadeIn">
+                                    <div id="polling-top" className="card px-4 my-3">
+                                        <div className="form-group mt-2 mb-0">
+                                            <MDBInput
+                                                outline
+                                                type="text"
+                                                label="Judul Polling"
+                                                className="shadow-sm font-weight-bold h5-responsive"
+                                                onChange={(e) => this.setState({ pollingTitle: e.target.value })}
+                                                value={this.state.pollingTitle}
+                                            />
+                                            <MDBInput
+                                                outline
+                                                type="textarea"
+                                                className="shadow-sm"
+                                                label="Deskripsi Polling"
+                                                onChange={(e) => this.setState({ pollingDesc: e.target.value })}
+                                                value={this.state.pollingDesc}
+                                            />
+                                        </div>
                                     </div>
-                                </div>
+                                </MDBAnimation>
 
                                 {/* POLLING QUESTIONS */}
                                 <div className="form-group">
                                     {this.renderQuestions()}
 
                                     {/* ADD QUESTION */}
-                                    <MDBBtn color="indigo" className="px-2 py-1" onClick={this.addQuestion}>
-                                        <MDBIcon icon="plus" /> Pertanyaan
-                                    </MDBBtn>
+                                    <div className="text-center">
+                                        <MDBBtn color="indigo" className="px-2 py-1" onClick={this.addQuestion}>
+                                            <MDBIcon icon="plus" /> Pertanyaan
+                                        </MDBBtn>
+                                    </div>
                                 </div>
                                 {/* POLLING QUESTIONS */}
 

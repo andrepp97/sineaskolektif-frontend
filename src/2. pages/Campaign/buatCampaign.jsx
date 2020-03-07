@@ -3,7 +3,7 @@ import Axios from 'axios';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
-import { MDBCol, MDBInput, MDBBtn, MDBIcon } from 'mdbreact';
+import { MDBCol, MDBInput, MDBBtn, MDBIcon, MDBAnimation } from 'mdbreact';
 
 // HELPER
 import { urlAPI } from '../../5. helper/database';
@@ -126,111 +126,113 @@ class BuatCampaign extends Component {
                 <div className="page-padding">
                     <div className="container-fluid px-3 px-sm-5">
 
-                        <div className="row">
+                        <MDBAnimation type="fadeIn">
+                            <div className="row">
 
-                            <MDBCol md="7" lg="8">
-                                <h2 className="h2-responsive">Buat Campaign</h2>
+                                <MDBCol md="7" lg="8">
+                                    <h2 className="h2-responsive">Buat Campaign</h2>
 
-                                {
-                                    this.state.errorText
-                                        ?
-                                        <div className="alert alert-danger animated fadeIn my-3">
-                                            {this.state.errorText}
-                                        </div>
-                                        :
-                                        null
-                                }
-
-                                <div className="form-group">
-                                    <MDBInput
-                                        outline
-                                        type="text"
-                                        label="Judul Campaign"
-                                        className="shadow-sm"
-                                        onChange={(e) => this.setState({ campaignTitle: e.target.value })}
-                                    />
-                                    <MDBInput
-                                        outline
-                                        rows="5"
-                                        type="textarea"
-                                        label="Deskripsi Campaign"
-                                        className="rounded shadow-sm"
-                                        onChange={(e) => this.setState({ campaignDesc: e.target.value })}
-                                    />
-
-                                    <div className="form-row">
-                                        <div className="col">
-                                            <MDBInput outline type="date" label="Tanggal Mulai" onChange={(e) => this.setState({ start: e.target.value })} />
-                                        </div>
-                                        <div className="col">
-                                            <MDBInput outline type="date" label="Tanggal Selesai" onChange={(e) => this.setState({ end: e.target.value })} />
-                                        </div>
-                                    </div>
-
-                                    <MDBInput outline type="date" label="Tanggal Rilis" onChange={(e) => this.setState({ release: e.target.value })} />
-                                
-                                    <label htmlFor="campaign-file" className="font-small pl-2" style={{ color:'#757779' }}>
-                                        Gambar <small>(Recommended: <strong>728x480</strong> px)</small>
-                                    </label>
-                                    <FilePond
-                                        id="campaign-file"
-                                        maxFiles={1}
-                                        allowMultiple={false}
-                                        ref={ref => this.pond = ref}
-                                        onupdatefiles={fileItems => {
-                                            this.setState({
-                                                files: fileItems.map(fileItem => fileItem.file)
-                                            });
-                                        }}
-                                        acceptedFileTypes={['image/*']}
-                                        onaddfile={file => console.log(this.state.files)}
-                                    />
-                                </div>
-                            </MDBCol>
-
-                            <MDBCol md="5" lg="4" className="mt-4 mt-lg-0">
-                                <div className="card mb-4">
-                                    <div className="card-body">
-                                        <div className="text-center font-weight-bold mb-3">
-                                            Tips Agar Campaignmu Diterima
-                                    </div>
-                                        <hr />
-                                        <p style={{ color: '#515151' }}>1. Pastikan konten tidak mengandung SARA.</p>
-                                        <p style={{ color: '#515151' }}>2. Informasi yang diberikan lengkap dan mudah dimengerti.</p>
-                                        <p style={{ color: '#515151' }}>3. Pastikan deskripsi campaign jelas, sehingga mudah ditemukan oleh donatur.</p>
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <MDBBtn outline color="elegant" className="btn-block mb-4" onClick={() => window.history.back()}>
-                                        <MDBIcon icon="times" />
-                                        <span className="ml-2">CANCEL</span>
-                                    </MDBBtn>
                                     {
-                                        this.state.isLoading
+                                        this.state.errorText
                                             ?
-                                            <MDBBtn color="dark-green" className="btn-block mb-4" disabled>
-                                                <div className="spinner-border spinner-border-sm" role="status">
-                                                    <span className="sr-only">Loading...</span>
-                                                </div>
-                                                <span className="ml-2">SUBMIT</span>
-                                            </MDBBtn>
+                                            <div className="alert alert-danger animated fadeIn my-3">
+                                                {this.state.errorText}
+                                            </div>
                                             :
-                                            <MDBBtn color="dark-green" className="btn-block mb-4" disabled={!this.state.agree} onClick={this.submitCampaign}>
-                                                <MDBIcon icon="paper-plane" />
-                                                <span className="ml-2">SUBMIT</span>
-                                            </MDBBtn>
+                                            null
                                     }
-                                    <div className="custom-control custom-checkbox">
-                                        <input type="checkbox" className="custom-control-input" id="agreement" onChange={() => this.setState({ agree: !this.state.agree })} />
-                                        <label className="custom-control-label font-small" htmlFor="agreement">
-                                            Saya setuju dengan <span className="text-primary">syarat & ketentuan</span> yang berlaku di Sineas Kolektif
-                                    </label>
-                                    </div>
-                                </div>
-                            </MDBCol>
 
-                        </div>
+                                    <div className="form-group">
+                                        <MDBInput
+                                            outline
+                                            type="text"
+                                            label="Judul Campaign"
+                                            className="shadow-sm"
+                                            onChange={(e) => this.setState({ campaignTitle: e.target.value })}
+                                        />
+                                        <MDBInput
+                                            outline
+                                            rows="5"
+                                            type="textarea"
+                                            label="Deskripsi Campaign"
+                                            className="rounded shadow-sm"
+                                            onChange={(e) => this.setState({ campaignDesc: e.target.value })}
+                                        />
+
+                                        <div className="form-row">
+                                            <div className="col">
+                                                <MDBInput outline type="date" label="Tanggal Mulai" onChange={(e) => this.setState({ start: e.target.value })} />
+                                            </div>
+                                            <div className="col">
+                                                <MDBInput outline type="date" label="Tanggal Selesai" onChange={(e) => this.setState({ end: e.target.value })} />
+                                            </div>
+                                        </div>
+
+                                        <MDBInput outline type="date" label="Tanggal Rilis" onChange={(e) => this.setState({ release: e.target.value })} />
+                                    
+                                        <label htmlFor="campaign-file" className="font-small pl-2" style={{ color:'#757779' }}>
+                                            Gambar <small>(Recommended: <strong>728x480</strong> px)</small>
+                                        </label>
+                                        <FilePond
+                                            id="campaign-file"
+                                            maxFiles={1}
+                                            allowMultiple={false}
+                                            ref={ref => this.pond = ref}
+                                            onupdatefiles={fileItems => {
+                                                this.setState({
+                                                    files: fileItems.map(fileItem => fileItem.file)
+                                                });
+                                            }}
+                                            acceptedFileTypes={['image/*']}
+                                            onaddfile={file => console.log(this.state.files)}
+                                        />
+                                    </div>
+                                </MDBCol>
+
+                                <MDBCol md="5" lg="4" className="mt-4 mt-lg-0">
+                                    <div className="card mb-4">
+                                        <div className="card-body">
+                                            <div className="text-center font-weight-bold mb-3">
+                                                Tips Agar Campaignmu Diterima
+                                        </div>
+                                            <hr />
+                                            <p style={{ color: '#515151' }}>1. Pastikan konten tidak mengandung SARA.</p>
+                                            <p style={{ color: '#515151' }}>2. Informasi yang diberikan lengkap dan mudah dimengerti.</p>
+                                            <p style={{ color: '#515151' }}>3. Pastikan deskripsi campaign jelas, sehingga mudah ditemukan oleh donatur.</p>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <MDBBtn outline color="elegant" className="btn-block mb-4" onClick={() => window.history.back()}>
+                                            <MDBIcon icon="times" />
+                                            <span className="ml-2">CANCEL</span>
+                                        </MDBBtn>
+                                        {
+                                            this.state.isLoading
+                                                ?
+                                                <MDBBtn color="dark-green" className="btn-block mb-4" disabled>
+                                                    <div className="spinner-border spinner-border-sm" role="status">
+                                                        <span className="sr-only">Loading...</span>
+                                                    </div>
+                                                    <span className="ml-2">SUBMIT</span>
+                                                </MDBBtn>
+                                                :
+                                                <MDBBtn color="dark-green" className="btn-block mb-4" disabled={!this.state.agree} onClick={this.submitCampaign}>
+                                                    <MDBIcon icon="paper-plane" />
+                                                    <span className="ml-2">SUBMIT</span>
+                                                </MDBBtn>
+                                        }
+                                        <div className="custom-control custom-checkbox">
+                                            <input type="checkbox" className="custom-control-input" id="agreement" onChange={() => this.setState({ agree: !this.state.agree })} />
+                                            <label className="custom-control-label font-small" htmlFor="agreement">
+                                                Saya setuju dengan <span className="text-primary">syarat & ketentuan</span> yang berlaku di Sineas Kolektif
+                                        </label>
+                                        </div>
+                                    </div>
+                                </MDBCol>
+
+                            </div>
+                        </MDBAnimation>
 
                     </div>
                 </div>
