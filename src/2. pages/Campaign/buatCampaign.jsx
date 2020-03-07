@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
-import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
 import { MDBCol, MDBInput, MDBBtn, MDBIcon } from 'mdbreact';
 
@@ -151,8 +151,8 @@ class BuatCampaign extends Component {
                                     />
                                     <MDBInput
                                         outline
-                                        type="textarea"
                                         rows="5"
+                                        type="textarea"
                                         label="Deskripsi Campaign"
                                         className="rounded shadow-sm"
                                         onChange={(e) => this.setState({ campaignDesc: e.target.value })}

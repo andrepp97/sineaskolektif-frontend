@@ -8,7 +8,7 @@ const User = (props) => {
     return (
         <div className="row" style={{ paddingTop: '30px' }}>
 
-            <div className="col-2">
+            <div className="col-sm-4 col-lg-2 px-4 d-flex align-items-center">
                 <img
                     className="img-fluid img-thumbnail rounded-circle shadow-sm"
                     src={Default}
@@ -16,7 +16,7 @@ const User = (props) => {
                 />
             </div>
 
-            <div className="col-7 d-flex align-items-center">
+            <div className="col-sm-8 col-lg-7 d-flex align-items-center">
                 <div>
                     <h3 className="h3-responsive">{props.username}</h3>
                     <small style={{ color: '#606060' }}>
@@ -25,7 +25,7 @@ const User = (props) => {
                 </div>
             </div>
 
-            <div className="col-3 d-flex flex-column justify-content-around">
+            <div className="col-lg-3 d-flex flex-column justify-content-around mt-3 mt-lg-0">
                 <Link to='/buat-campaign' className="btn btn-indigo btn-block">
                     Buat Campaign
                 </Link>
