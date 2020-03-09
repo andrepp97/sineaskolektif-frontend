@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
-import { MDBAnimation } from 'mdbreact';
 
 // HELPER
 import { urlAPI } from '../../5. helper/database';
+import Loader from '../../1. components/Loader';
 
 // IMPORT COMPONENTS //
 import Jumbotron from './Home-Components/Jumbotron';
@@ -14,27 +14,33 @@ import Pollings from './Home-Components/Polling';
 class Homepage extends Component {
     state = {
         campaignData: [],
-        pollingData: []
+        pollingData: [],
+        loadingCampaign: false,
+        loadingPolling: false
     }
 
     // GET DATA
     getNewCampaigns = () => {
+        this.setState({ loadingCampaign: true })
         Axios.get(urlAPI + '/campaign/getNewCampaign')
             .then(res => {
-                this.setState({ campaignData: res.data })
+                this.setState({ campaignData: res.data, loadingCampaign: false })
             })
             .catch(err => {
                 console.log(err.response)
+                this.setState({ loadingCampaign: false })
             })
     }
 
     getNewPollings = () => {
+        this.setState({ loadingPolling: true })
         Axios.get(urlAPI + '/polling/getNewPolling')
             .then(res => {
-                this.setState({ pollingData: res.data })
+                this.setState({ pollingData: res.data, loadingPolling: false })
             })
             .catch(err => {
                 console.log(err.response)
+                this.setState({ loadingPolling: false })
             })
     }
     // GET DATA
@@ -62,7 +68,13 @@ class Homepage extends Component {
                 </div>
                 {/* DIVIDER */}
 
-                <Campaigns data={this.state.campaignData} />
+                {
+                    this.state.loadingCampaign
+                    ?
+                        <Loader />
+                    :
+                        <Campaigns data={this.state.campaignData} />
+                }
 
                 {/* DIVIDER */}
                 <div className='container px-sm-5'>
@@ -80,7 +92,14 @@ class Homepage extends Component {
                 </div>
                 {/* DIVIDER */}
 
-                <Pollings data={this.state.pollingData} />
+
+                {
+                    this.state.loadingPolling
+                    ?
+                        <Loader />
+                    :
+                        <Pollings data={this.state.pollingData} />
+                }
                 
             </div>
         );
