@@ -8,6 +8,7 @@ import User from './user';
 import Dashboard from './components/dashboard';
 import Profile from './components/profile';
 import Campaign from './components/campaign';
+import Polling from './components/polling';
 
 const DashboardRoute = (props) => {
 
@@ -41,6 +42,11 @@ const DashboardRoute = (props) => {
                                     Campaign
                                 </MDBNavLink>
                             </MDBNavItem>
+                            <MDBNavItem>
+                                <MDBNavLink to={`${path}/polling`}>
+                                    Polling
+                                </MDBNavLink>
+                            </MDBNavItem>
                         </MDBNav>
     
                     </div>
@@ -58,6 +64,9 @@ const DashboardRoute = (props) => {
                         </Route>
                         <Route exact path={`${path}/campaign`}>
                             <Campaign uid={props.id} />
+                        </Route>
+                        <Route exact path={`${path}/polling`}>
+                            <Polling uid={props.id} />
                         </Route>
                     </Switch>
                 </div>

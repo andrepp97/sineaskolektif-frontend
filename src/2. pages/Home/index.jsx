@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
+import { MDBAnimation } from 'mdbreact';
 
 // HELPER
 import { urlAPI } from '../../5. helper/database';
@@ -8,10 +9,12 @@ import { urlAPI } from '../../5. helper/database';
 import Jumbotron from './Home-Components/Jumbotron';
 import Campaigns from './Home-Components/Campaign';
 import StartNow from './Home-Components/StartNow';
+import Pollings from './Home-Components/Polling';
 
 class Homepage extends Component {
     state = {
-        campaignData: []
+        campaignData: [],
+        pollingData: []
     }
 
     // GET DATA
@@ -25,11 +28,24 @@ class Homepage extends Component {
             })
     }
 
+    getNewPollings = () => {
+        Axios.get(urlAPI + '/polling/getNewPolling')
+            .then(res => {
+                this.setState({ pollingData: res.data })
+            })
+            .catch(err => {
+                console.log(err.response)
+            })
+    }
+    // GET DATA
+
 
     // LIFECYCLE
     componentDidMount() {
         this.getNewCampaigns()
+        this.getNewPollings()
     }
+    // LIFECYCLE
 
     
     // MAIN RENDER
@@ -56,6 +72,15 @@ class Homepage extends Component {
                 {/* DIVIDER */}
 
                 <StartNow />
+
+                {/* DIVIDER */}
+                <div className='container px-sm-5'>
+                    <hr className="my-0" />
+                    <hr className="my-0" />
+                </div>
+                {/* DIVIDER */}
+
+                <Pollings data={this.state.pollingData} />
                 
             </div>
         );

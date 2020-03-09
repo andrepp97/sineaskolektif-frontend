@@ -1,4 +1,3 @@
-/* eslint-disable no-labels */
 import React, { Component } from 'react';
 import Axios from 'axios';
 import { Redirect } from 'react-router-dom';
@@ -9,20 +8,26 @@ import { MDBCol, MDBInputGroup, MDBInput, MDBBtn, MDBIcon, MDBAnimation } from '
 // HELPER
 import { urlAPI } from '../../5. helper/database';
 
+// FILEPOND
+import { FilePond, registerPlugin } from 'react-filepond';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
+import 'filepond/dist/filepond.min.css';
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css';
+registerPlugin(FilePondPluginImagePreview, FilePondPluginFileValidateType);
+
 class BuatPolling extends Component {
     state = {
         // GENERAL
         agree: false,
         errorText: '',
         isLoading: false,
-        dummy: false,
 
         // POLLING DATA
         pollingTitle: '',
         pollingDesc: '',
         questions: [
             {
-                id: 1,
                 question: '',
                 options: ['']
             }
@@ -30,6 +35,12 @@ class BuatPolling extends Component {
         start: '',
         end: '',
         files: null
+    }
+
+
+    // LIFECYCLE
+    componentDidMount() {
+        window.scrollTo(0, 0)
     }
 
 
@@ -41,9 +52,10 @@ class BuatPolling extends Component {
                     <div className="card mb-3">
                         <div className="card-body">
                             <MDBInputGroup
+                                onChange={(e) => this.questionHandle(idx, e.target.value)}
                                 hint={`Pertanyaan ${idx + 1}`}
                                 prepend={<h4 className="px-2 h4-responsive">{idx + 1}</h4>}
-                                append={<MDBBtn color="red" className="px-2 py-1" onClick={() => this.removeQuestion(val.id)}><MDBIcon icon="times" /></MDBBtn>}
+                                append={<MDBBtn color="red" className="px-2 py-1" onClick={() => this.removeQuestion(idx)}><MDBIcon icon="times" /></MDBBtn>}
                             />
                             <ul className="mt-2 mb-0">
                                 {
@@ -52,6 +64,7 @@ class BuatPolling extends Component {
                                             <MDBAnimation type="fadeIn" key={idxOption}>
                                                 <li className="my-1">
                                                     <MDBInputGroup
+                                                        onChange={(e) => this.optionHandle(idx, idxOption, e.target.value)}
                                                         hint={`Pilihan ${idxOption + 1}`}
                                                         append={<MDBBtn color="transparent" className="px-2 py-1" onClick={() => this.removeOption(idx, idxOption)}>
                                                                     <MDBIcon icon="times" />
@@ -79,24 +92,22 @@ class BuatPolling extends Component {
     addQuestion = () => {
         let currentQuestions = this.state.questions
         if (currentQuestions.length < 5) {
-            currentQuestions.push({ 
-                id: currentQuestions[currentQuestions.length-1].id + 1,
+            currentQuestions.push({
                 question: '',
                 options: ['']
              })
              this.setState({ questions: currentQuestions })
-             window.scrollTo(0, window.innerHeight)
         } else {
             toast.error('Polling dibatasi hingga 5 pertanyaan')
         }
     }
 
-    removeQuestion = (id) => {
+    removeQuestion = (idxQ) => {
         var newQuestions = []
         let currentQuestions = this.state.questions
 
         currentQuestions.forEach((question,idx) => {
-            if (id !== question.id) {
+            if (idxQ !== idx) {
                 newQuestions.push(question)
             }
         })
@@ -135,6 +146,99 @@ class BuatPolling extends Component {
     // OPTIONS
 
 
+    // INPUT HANDLE
+    questionHandle = (idx, val) => {
+        let questionTemp = this.state.questions
+        questionTemp[idx].question = val
+        this.setState({ questions: questionTemp })
+    }
+
+    optionHandle = (idxQ, idxO, val) => {
+        let questionTemp = this.state.questions
+        questionTemp[idxQ].options[idxO] = val
+        this.setState({ questions: questionTemp })
+    }
+    // INPUT HANDLE
+
+
+    // CHECK INPUTS
+    validateInput = () => {
+        let err = ''
+
+        if (this.state.questions.length < 1) {
+            this.setState({ errorText: 'Polling Harus Memiliki Minimal 1 Pertanyaan!' })
+            err = 'error'
+        }
+        if (!this.state.files) {
+            this.setState({ errorText: 'Gambar Tidak Boleh Kosong!' })
+            err = 'error'
+        }
+        if (!this.state.end) {
+            this.setState({ errorText: 'Tanggal Selesai Tidak Boleh Kosong!' })
+            err = 'error'
+        }
+        if (!this.state.start) {
+            this.setState({ errorText: 'Tanggal Mulai Tidak Boleh Kosong!' })
+            err = 'error'
+        }
+        if (!this.state.pollingDesc) {
+            this.setState({ errorText: 'Deskripsi Polling Harus Diisi!' })
+            err = 'error'
+        }
+        if (!this.state.pollingTitle) {
+            this.setState({ errorText: 'Judul Polling Harus Diisi!' })
+            err = 'error'
+        }
+
+        if (err) {
+            window.scrollTo(0, 0)
+            return false
+        } else {
+            err = ''
+            this.setState({ errorText: '' })
+            return true
+        }
+    }
+
+    // SUBMIT POLLING
+    submitPolling = () => {
+        let valid = this.validateInput()
+
+        if (valid) {
+            // Loading state
+            this.setState({ isLoading: true })
+
+            // FORM DATA
+            var formdata = new FormData(),
+                options = {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
+            formdata.append('image', this.state.files[0])
+            formdata.append('data', JSON.stringify({
+                idUser: this.props.id,
+                polling_title: this.state.pollingTitle,
+                polling_desc: this.state.pollingDesc,
+                start_date: this.state.start,
+                end_date: this.state.end,
+                questions: this.state.questions
+            }))
+
+            Axios.post(urlAPI + '/polling/buatPolling', formdata, options)
+                .then(res => {
+                    toast.success('Polling berhasil disimpan. Polling kamu akan ditampilkan setelah diverifikasi oleh admin.')
+                    window.location.pathname = '/user/polling'
+                })
+                .catch(err => {
+                    console.log(err.response)
+                    this.setState({ isLoading: false })
+                })
+        }
+    }
+    // SUBMIT POLLING
+
+
     // MAIN RENDER
     render() {
         if (this.props.isLogin) {
@@ -148,6 +252,16 @@ class BuatPolling extends Component {
                             <MDBCol md="7" lg="8">
 
                                 <h2 className="h2-responsive">Buat Polling</h2>
+
+                                {
+                                    this.state.errorText
+                                        ?
+                                        <div className="alert alert-danger animated shake my-3">
+                                            {this.state.errorText}
+                                        </div>
+                                        :
+                                        null
+                                }
 
                                 <MDBAnimation type="fadeIn">
                                     <div id="polling-top" className="card px-4 my-3">
@@ -168,12 +282,51 @@ class BuatPolling extends Component {
                                                 onChange={(e) => this.setState({ pollingDesc: e.target.value })}
                                                 value={this.state.pollingDesc}
                                             />
+                                            <div className="form-row">
+                                                <div className="col">
+                                                    <MDBInput
+                                                        outline
+                                                        type="date"
+                                                        label="Tanggal Mulai"
+                                                        min={new Date().toISOString().split("T")[0]}
+                                                        onChange={(e) => this.setState({ start: e.target.value })}
+                                                    />
+                                                </div>
+                                                <div className="col">
+                                                    <MDBInput
+                                                        outline
+                                                        type="date"
+                                                        label="Tanggal Selesai"
+                                                        min={new Date().toISOString().split("T")[0]}
+                                                        onChange={(e) => this.setState({ end: e.target.value })}
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <label htmlFor="campaign-file" className="font-small pl-2" style={{ color: '#757779' }}>
+                                                    Gambar <small>(Recommended: <strong>728x480</strong> px)</small>
+                                                </label>
+                                                <FilePond
+                                                    id="campaign-file"
+                                                    maxFiles={1}
+                                                    allowMultiple={false}
+                                                    ref={ref => this.pond = ref}
+                                                    onupdatefiles={fileItems => {
+                                                        this.setState({
+                                                            files: fileItems.map(fileItem => fileItem.file)
+                                                        });
+                                                    }}
+                                                    acceptedFileTypes={['image/*']}
+                                                    onaddfile={file => console.log(this.state.files)}
+                                                />
+                                            </div>
                                         </div>
                                     </div>
                                 </MDBAnimation>
 
                                 {/* POLLING QUESTIONS */}
-                                <div className="form-group">
+                                <div className="form-group mt-4">
+                                    <h4 className="h4-responsive">Pertanyaan</h4>
                                     {this.renderQuestions()}
 
                                     {/* ADD QUESTION */}
@@ -217,7 +370,7 @@ class BuatPolling extends Component {
                                                 <span className="ml-2">SUBMIT</span>
                                             </MDBBtn>
                                             :
-                                            <MDBBtn color="dark-green" className="btn-block mb-4" disabled={!this.state.agree}>
+                                            <MDBBtn color="dark-green" className="btn-block mb-4" disabled={!this.state.agree} onClick={this.submitPolling}>
                                                 <MDBIcon icon="paper-plane" />
                                                 <span className="ml-2">SUBMIT</span>
                                             </MDBBtn>

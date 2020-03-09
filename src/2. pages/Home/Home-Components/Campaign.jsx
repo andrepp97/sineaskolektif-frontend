@@ -17,21 +17,22 @@ const Campaign = ({data}) => {
                 <p className='opacity-80'>Yuk Temukan Kolaborasi Menarik Disini</p>
             </div>
 
-            <div className="row my-4 justify-content-center">
                 {
                     data.length
                     ?
-                        renderCampaignData(data)
+                        <>
+                            <div className="row my-4 justify-content-center">
+                                {renderCampaignData(data)}
+                            </div>
+                            <MDBBtn outline color="indigo" className="rounded-pill mb-4">
+                                LIHAT SEMUA
+                            </MDBBtn>
+                        </>
                     :
-                        <div className="alert alert-danger w-responsive py-4 mx-3">
+                        <div className="alert alert-danger py-4 mx-3">
                             <h4 className="h4-responsive my-auto">Belum Ada Campaign</h4>
                         </div>
                 }
-            </div>
-
-            <MDBBtn outline color="indigo" className="rounded-pill mb-4">
-                LIHAT SEMUA
-            </MDBBtn>
 
         </div>
     );

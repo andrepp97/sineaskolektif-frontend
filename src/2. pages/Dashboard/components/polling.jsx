@@ -4,22 +4,22 @@ import Axios from 'axios';
 import { MDBBtn, MDBIcon } from 'mdbreact';
 import { urlAPI } from '../../../5. helper/database';
 
-class Campaign extends Component {
+class Polling extends Component {
     state = {
         isLoading: false,
-        campaignData: []
+        pollingData: []
     }
 
 
     // GET DATA
-    getCampaign = () => {
+    getPolling = () => {
         this.setState({ isLoading: true })
-        Axios.get(urlAPI + '/campaign/getCampaignByUser', {
+        Axios.get(urlAPI + '/polling/getPollingByUser', {
             params: {
                 id: this.props.uid
             }
         }).then(res => {
-            this.setState({ campaignData: res.data, isLoading: false })
+            this.setState({ pollingData: res.data, isLoading: false })
         }).catch(err => {
             console.log(err.response)
             this.setState({ isLoading: false })
@@ -29,20 +29,19 @@ class Campaign extends Component {
 
     // LIFECYCLE
     componentDidMount() {
-        this.getCampaign()
+        this.getPolling()
     }
 
 
     // RENDERS
-    renderCampaign = () => {
-        return this.state.campaignData.map((val,idx) => {
+    renderPolling = () => {
+        return this.state.pollingData.map((val, idx) => {
             return (
                 <tr key={idx}>
-                    <td>{idx+1}</td>
-                    <td>{val.title}</td>
+                    <td>{idx + 1}</td>
+                    <td>{val.polling_title}</td>
                     <td>{moment(val.start_date).format('LL')}</td>
                     <td>{moment(val.end_date).format('LL')}</td>
-                    <td>{moment(val.release_date).format('LL')}</td>
                     <td>{val.status}</td>
                     <td className="text-center">
                         <MDBBtn color="indigo" className="rounded-circle m-0 py-1 px-2">
@@ -59,7 +58,7 @@ class Campaign extends Component {
     render() {
         if (this.state.isLoading) {
             return (
-                <div className="d-flex align-items-center justify-content-center" style={{ minHeight:'25vh' }}>
+                <div className="d-flex align-items-center justify-content-center" style={{ minHeight: '25vh' }}>
                     <div className="spinner-border" role="status">
                         <span className="sr-only">Loading...</span>
                     </div>
@@ -69,7 +68,7 @@ class Campaign extends Component {
         return (
             <div className="minheight50 py-4">
 
-                <h4 className="h4-responsive mb-3">CAMPAIGN KAMU</h4>
+                <h4 className="h4-responsive mb-3">POLLING KAMU</h4>
 
                 <div className="row">
                     <div className="col-auto">
@@ -79,16 +78,15 @@ class Campaign extends Component {
                                 <thead>
                                     <tr>
                                         <th className="font-weight-bold">#</th>
-                                        <th className="font-weight-bold">Campaign</th>
+                                        <th className="font-weight-bold">Polling</th>
                                         <th className="font-weight-bold">Tgl Mulai</th>
                                         <th className="font-weight-bold">Tgl Selesai</th>
-                                        <th className="font-weight-bold">Tgl Rilis</th>
                                         <th className="font-weight-bold">Status</th>
                                         <th className="font-weight-bold text-center">Detail</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {this.renderCampaign()}
+                                    {this.renderPolling()}
                                 </tbody>
                             </table>
                         </div>
@@ -101,4 +99,4 @@ class Campaign extends Component {
     }
 }
 
-export default Campaign;
+export default Polling;

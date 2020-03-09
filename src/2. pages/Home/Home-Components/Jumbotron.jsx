@@ -5,7 +5,7 @@ import JumboBG from '../../../3. assets/img/jumbotron.svg';
 
 const JumbotronPage = (props) => {
     return (
-        <div id="jumbotron">
+        <div id="jumbotron" className="animated fadeIn">
             <div className="container d-flex h-100">
                 <div className="row justify-content-center align-items-center">
                     <div className="col-md-6 order-md-last mt-5 mt-md-0">

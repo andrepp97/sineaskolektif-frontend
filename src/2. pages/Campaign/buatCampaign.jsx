@@ -109,7 +109,7 @@ class BuatCampaign extends Component {
             // POST Data
             Axios.post(urlAPI + '/campaign/buatCampaign', formdata, options)
                 .then(res => {
-                    toast.success('Campaign berhasil disimpan')
+                    toast.success('Campaign berhasil disimpan. Campaign kamu akan ditampilkan setelah diverifikasi oleh admin.')
                     window.location.pathname = '/user/campaign'
                 }).catch(err => {
                     console.log(err.response)
@@ -135,7 +135,7 @@ class BuatCampaign extends Component {
                                     {
                                         this.state.errorText
                                             ?
-                                            <div className="alert alert-danger animated fadeIn my-3">
+                                            <div className="alert alert-danger animated shake my-3">
                                                 {this.state.errorText}
                                             </div>
                                             :
@@ -161,14 +161,14 @@ class BuatCampaign extends Component {
 
                                         <div className="form-row">
                                             <div className="col">
-                                                <MDBInput outline type="date" label="Tanggal Mulai" onChange={(e) => this.setState({ start: e.target.value })} />
+                                                <MDBInput outline type="date" min={new Date().toISOString().split("T")[0]} label="Tanggal Mulai" onChange={(e) => this.setState({ start: e.target.value })} />
                                             </div>
                                             <div className="col">
-                                                <MDBInput outline type="date" label="Tanggal Selesai" onChange={(e) => this.setState({ end: e.target.value })} />
+                                                <MDBInput outline type="date" min={new Date().toISOString().split("T")[0]} label="Tanggal Selesai" onChange={(e) => this.setState({ end: e.target.value })} />
                                             </div>
                                         </div>
 
-                                        <MDBInput outline type="date" label="Tanggal Rilis" onChange={(e) => this.setState({ release: e.target.value })} />
+                                        <MDBInput outline type="date" min={new Date().toISOString().split("T")[0]} label="Tanggal Rilis" onChange={(e) => this.setState({ release: e.target.value })} />
                                     
                                         <label htmlFor="campaign-file" className="font-small pl-2" style={{ color:'#757779' }}>
                                             Gambar <small>(Recommended: <strong>728x480</strong> px)</small>
