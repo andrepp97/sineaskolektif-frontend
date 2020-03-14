@@ -29,8 +29,10 @@ const Campaign = ({data}) => {
                             </Link>
                         </>
                     :
-                        <div className="alert alert-danger py-4 mx-3">
-                            <h4 className="h4-responsive my-auto">Belum Ada Campaign</h4>
+                        <div className="container">
+                            <div className="alert alert-danger py-4">
+                                <h4 className="h4-responsive my-auto">Belum Ada Campaign</h4>
+                            </div>
                         </div>
                 }
 

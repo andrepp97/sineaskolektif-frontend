@@ -6,7 +6,7 @@ import { urlAPI } from '../5. helper/database';
 
 const CampaignCard = ({data}) => {
     return (
-        <div className="col-md-6 col-lg-4 mb-4">
+        <div className="col-md-6 col-lg-4" style={{marginBottom:'2rem'}}>
             <Link to={`/campaign/${data.id}`} className="card campaign-card">
 
                 <img

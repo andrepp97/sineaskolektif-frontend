@@ -67,7 +67,9 @@ class SemuaCampaign extends Component {
                     {
                         this.state.isLoading
                         ?
-                            <Loader />
+                            <div style={{ marginTop: '10rem' }}>
+                                <Loader />
+                            </div>
                         :
                             <div className="row px-2 px-sm-0" style={{ marginTop: '30vh' }}>
                                 {this.renderAllCampaign()}

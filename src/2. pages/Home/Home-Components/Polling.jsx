@@ -1,5 +1,5 @@
 import React from 'react';
-import { MDBBtn } from 'mdbreact';
+import { Link } from 'react-router-dom';
 import PollingCard from '../../../1. components/PollingCard';
 
 const renderPollingData = (data) => {
@@ -24,9 +24,9 @@ const Polling = ({ data }) => {
                         <div className="row my-4 justify-content-center">
                             {renderPollingData(data)}
                         </div>
-                        <MDBBtn outline color="indigo" className="rounded-pill mb-4">
+                        <Link to='/polling' className="btn btn-outline-indigo rounded-pill mb-4">
                             LIHAT SEMUA
-                        </MDBBtn>
+                        </Link>
                     </>
                     :
                     <div className="container">
