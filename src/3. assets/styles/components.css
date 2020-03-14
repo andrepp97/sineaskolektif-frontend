@@ -63,4 +63,17 @@
     font-weight: bold;
     margin-bottom: 10px;
 }
+
+.card-detail::before {
+    content: '';
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 10px;
+    height: 100%;
+    position: absolute;
+    background-color: indigo;
+    border-top-left-radius: 1vh;
+    border-bottom-left-radius: 1vh;
+}
 /* CAMPAIGN */

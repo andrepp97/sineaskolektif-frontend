@@ -52,9 +52,11 @@ class Navbar extends Component {
                                 </MDBDropdownToggle>
                                 <MDBDropdownMenu>
                                     <MDBDropdownItem>
+                                        <MDBIcon icon="pager" />
                                         <Link to='/campaign'>Campaign</Link>
                                     </MDBDropdownItem>
                                     <MDBDropdownItem>
+                                        <MDBIcon icon="poll-h" />
                                         <Link to='/polling'>Polling</Link>
                                     </MDBDropdownItem>
                                 </MDBDropdownMenu>

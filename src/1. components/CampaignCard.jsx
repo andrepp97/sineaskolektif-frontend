@@ -11,7 +11,7 @@ const CampaignCard = ({data}) => {
 
                 <img
                     className="img-fluid card-img-top"
-                    style={{ maxHeight: '225px' }}
+                    style={{ maxHeight: '210px', minHeight: '210px' }}
                     src={urlAPI + data.image}
                     alt={data.title}
                 />
@@ -20,15 +20,15 @@ const CampaignCard = ({data}) => {
                     <h5 className="h5-responsive campaign-title">
                         {data.title}
                     </h5>
-                    <span style={{ fontSize:'11px' }}>
+                    <small>
                         {
-                            data.description.length > 120
+                            data.description.length > 105
                             ?
-                                `${data.description.slice(0,120)}...`
+                                `${data.description.slice(0,105)}...`
                             :
                                 data.description
                         }
-                    </span>
+                    </small>
                 </div>
 
                 <div className="card-footer pb-0">
@@ -47,7 +47,7 @@ const CampaignCard = ({data}) => {
                     </div>
 
                     <MDBProgress value={0} className="mt-3 mb-1" />
-                    <p><b>0%</b> Tercapai</p>
+                    <p className="text-center"><b>0%</b> Tercapai</p>
                 </div>
             </Link>
         </div>

@@ -2,14 +2,6 @@ import React from 'react';
 import { MDBContainer, MDBCol, MDBBtn } from 'mdbreact';
 import ImageHome from '../../../3. assets/img/home-1.svg';
 
-// FUNCTION SCROLL TO TOP
-const scrollToTop = () => {
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    })
-}
-
 // MAIN COMPONENT
 const StartNow = () => {
     return (
@@ -26,7 +18,7 @@ const StartNow = () => {
                     <MDBBtn
                         color="indigo"
                         className='rounded-pill'
-                        onClick={scrollToTop}
+                        href='/buat-campaign'
                     >
                         Mulai Sekarang
                     </MDBBtn>
