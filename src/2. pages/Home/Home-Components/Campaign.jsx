@@ -1,5 +1,5 @@
 import React from 'react';
-import { MDBBtn } from 'mdbreact';
+import { Link } from 'react-router-dom';
 import CampaignCard from '../../../1. components/CampaignCard';
 
 const renderCampaignData = (data) => {
@@ -10,7 +10,7 @@ const renderCampaignData = (data) => {
 
 const Campaign = ({data}) => {
     return (
-        <div className='container-fluid text-center py-5'>
+        <div className='container text-center py-5'>
 
             <div className="col-md-6 offset-md-3 justify-content-center">
                 <h2 className="h2-responsive">CAMPAIGN TERBARU</h2>
@@ -21,12 +21,12 @@ const Campaign = ({data}) => {
                     data.length
                     ?
                         <>
-                            <div className="row my-4 justify-content-center">
+                            <div className="row my-4">
                                 {renderCampaignData(data)}
                             </div>
-                            <MDBBtn outline color="indigo" className="rounded-pill mb-4">
+                            <Link to='/campaign' className="btn btn-outline-indigo rounded-pill mb-4">
                                 LIHAT SEMUA
-                            </MDBBtn>
+                            </Link>
                         </>
                     :
                         <div className="alert alert-danger py-4 mx-3">

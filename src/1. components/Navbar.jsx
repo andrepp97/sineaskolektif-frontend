@@ -51,9 +51,12 @@ class Navbar extends Component {
                                     <span className="mr-1 font-small font-weight-bold">TELUSURI</span>
                                 </MDBDropdownToggle>
                                 <MDBDropdownMenu>
-                                    <MDBDropdownItem href="#!">Menu 1</MDBDropdownItem>
-                                    <MDBDropdownItem href="#!">Menu 2</MDBDropdownItem>
-                                    <MDBDropdownItem href="#!">Menu 3</MDBDropdownItem>
+                                    <MDBDropdownItem>
+                                        <Link to='/campaign'>Campaign</Link>
+                                    </MDBDropdownItem>
+                                    <MDBDropdownItem>
+                                        <Link to='/polling'>Polling</Link>
+                                    </MDBDropdownItem>
                                 </MDBDropdownMenu>
                             </MDBDropdown>
                         </MDBNavItem>
