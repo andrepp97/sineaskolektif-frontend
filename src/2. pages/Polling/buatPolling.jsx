@@ -228,12 +228,12 @@ class BuatPolling extends Component {
             Axios.post(urlAPI + '/polling/buatPolling', formdata, options)
                 .then(res => {
                     toast.success('Polling berhasil disimpan. Polling kamu akan ditampilkan setelah diverifikasi oleh admin.')
-                    window.location.pathname = '/user/polling'
+                    setTimeout(() => window.location.pathname = '/user/polling', 1000)
                 })
                 .catch(err => {
-                    console.log(err.response)
-                    this.setState({ isLoading: false })
                     toast.error('Server bermasalah, coba lagi nanti.')
+                    this.setState({ isLoading: false })
+                    console.log(err.response)
                 })
         }
     }

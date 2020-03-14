@@ -110,7 +110,7 @@ class BuatCampaign extends Component {
             Axios.post(urlAPI + '/campaign/buatCampaign', formdata, options)
                 .then(res => {
                     toast.success('Campaign berhasil disimpan. Campaign kamu akan ditampilkan setelah diverifikasi oleh admin.')
-                    window.location.pathname = '/user/campaign'
+                    setTimeout(() => window.location.pathname = '/user/campaign', 1000)
                 }).catch(err => {
                     console.log(err.response)
                     this.setState({ isLoading: false })
