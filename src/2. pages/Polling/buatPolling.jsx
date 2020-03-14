@@ -233,6 +233,7 @@ class BuatPolling extends Component {
                 .catch(err => {
                     console.log(err.response)
                     this.setState({ isLoading: false })
+                    toast.error('Server bermasalah, coba lagi nanti.')
                 })
         }
     }
