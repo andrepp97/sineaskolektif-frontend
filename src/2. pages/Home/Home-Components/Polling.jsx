@@ -10,7 +10,7 @@ const renderPollingData = (data) => {
 
 const Polling = ({ data }) => {
     return (
-        <div className='container-fluid text-center py-5'>
+        <div className='container text-center py-5'>
 
             <div className="col-md-6 offset-md-3 justify-content-center">
                 <h2 className="h2-responsive">POLLING TERBARU</h2>
@@ -21,7 +21,7 @@ const Polling = ({ data }) => {
                 data.length
                     ?
                     <>
-                        <div className="row my-4 justify-content-center">
+                        <div className="row my-4">
                             {renderPollingData(data)}
                         </div>
                         <Link to='/polling' className="btn btn-outline-indigo rounded-pill mb-4">
