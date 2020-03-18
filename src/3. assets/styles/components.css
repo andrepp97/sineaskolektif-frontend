@@ -35,7 +35,8 @@
 /* CAMPAIGN */
 .campaign-card {
     color: #333333;
-    text-decoration: none;
+    width: 21rem;
+    margin: 1rem;
     transition: .25s;
 }
 .campaign-card:hover {
@@ -73,7 +74,22 @@
     height: 100%;
     position: absolute;
     background-color: indigo;
-    border-top-left-radius: 1vh;
-    border-bottom-left-radius: 1vh;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
 }
 /* CAMPAIGN */
+
+
+
+/* ==== RESPONSIVES ==== */
+@media only screen and (max-width: 1280px) {
+    .campaign-card {
+        width: 18rem;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .campaign-card {
+        width: 21rem;
+    }
+}

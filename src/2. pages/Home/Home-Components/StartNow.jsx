@@ -1,9 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { MDBContainer, MDBCol, MDBBtn } from 'mdbreact';
 import ImageHome from '../../../3. assets/img/home-1.svg';
 
 // MAIN COMPONENT
-const StartNow = () => {
+const StartNow = (props) => {
+    const handleStartNow = () => {
+        if (props.isLogin) {
+            window.scrollTo(0,0)
+        } else {
+            window.location.pathname = '/login'
+        }
+    }
+
     return (
         <MDBContainer className='py-5'>
             <div className="row text-center">
@@ -18,7 +27,7 @@ const StartNow = () => {
                     <MDBBtn
                         color="indigo"
                         className='rounded-pill'
-                        href='/buat-campaign'
+                        onClick={handleStartNow}
                     >
                         Mulai Sekarang
                     </MDBBtn>
@@ -37,4 +46,8 @@ const StartNow = () => {
     );
 };
 
-export default StartNow;
+const mapStateToProps = ({ userData }) => {
+    return { ...userData }
+}
+
+export default connect(mapStateToProps)(StartNow);

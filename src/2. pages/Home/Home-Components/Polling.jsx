@@ -21,7 +21,7 @@ const Polling = ({ data }) => {
                 data.length
                     ?
                     <>
-                        <div className="row my-4">
+                        <div className="row justify-content-center my-4">
                             {renderPollingData(data)}
                         </div>
                         <Link to='/polling' className="btn btn-outline-indigo rounded-pill mb-4">

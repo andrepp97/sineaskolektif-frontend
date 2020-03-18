@@ -48,7 +48,7 @@ class SemuaCampaign extends Component {
     render() {
         return (
             <div className="page-padding">
-                <div className="container px-3 px-sm-5">
+                <div className="container">
 
                     <MDBAnimation type="fadeIn">
 
@@ -74,7 +74,7 @@ class SemuaCampaign extends Component {
                                 <Loader />
                             </div>
                         :
-                            <div className="row px-2 px-sm-0" style={{ marginTop: '30vh' }}>
+                            <div className="row justify-content-center" style={{ marginTop: '30vh' }}>
                                 {this.renderAllCampaign()}
                             </div>
                     }

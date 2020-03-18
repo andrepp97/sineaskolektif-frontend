@@ -21,7 +21,7 @@ const Campaign = ({data}) => {
                     data.length
                     ?
                         <>
-                            <div className="row my-4">
+                            <div className="row justify-content-center my-4">
                                 {renderCampaignData(data)}
                             </div>
                             <Link to='/campaign' className="btn btn-outline-indigo rounded-pill mb-4">
