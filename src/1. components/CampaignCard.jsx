@@ -11,7 +11,7 @@ const CampaignCard = ({data}) => {
 
                 <img
                     className="img-fluid card-img-top"
-                    style={{ maxHeight: '210px', minHeight: '210px' }}
+                    style={{ height: '225px' }}
                     src={urlAPI + data.image}
                     alt={data.title}
                 />

@@ -53,6 +53,7 @@ class BuatPolling extends Component {
                         <div className="card-body">
                             <MDBInputGroup
                                 onChange={(e) => this.questionHandle(idx, e.target.value)}
+                                value={this.state.questions[idx].question}
                                 hint={`Pertanyaan ${idx + 1}`}
                                 prepend={<h4 className="px-2 h4-responsive">{idx + 1}</h4>}
                                 append={<MDBBtn color="red" className="px-2 py-1" onClick={() => this.removeQuestion(idx)}><MDBIcon icon="times" /></MDBBtn>}
@@ -65,6 +66,7 @@ class BuatPolling extends Component {
                                                 <li className="my-1">
                                                     <MDBInputGroup
                                                         onChange={(e) => this.optionHandle(idx, idxOption, e.target.value)}
+                                                        value={this.state.questions[idx].options[idxOption]}
                                                         hint={`Pilihan ${idxOption + 1}`}
                                                         append={<MDBBtn color="transparent" className="px-2 py-1" onClick={() => this.removeOption(idx, idxOption)}>
                                                                     <MDBIcon icon="times" />
@@ -148,20 +150,24 @@ class BuatPolling extends Component {
 
     // INPUT HANDLE
     questionHandle = (idx, val) => {
-        let questionTemp = this.state.questions
-        questionTemp[idx].question = val
-        this.setState({ questions: questionTemp })
+        if (!val.includes("'")) {
+            let questionTemp = this.state.questions
+            questionTemp[idx].question = val
+            this.setState({ questions: questionTemp })
+        }
     }
 
     optionHandle = (idxQ, idxO, val) => {
-        let questionTemp = this.state.questions
-        questionTemp[idxQ].options[idxO] = val
-        this.setState({ questions: questionTemp })
+        if (!val.includes("'")) {
+            let questionTemp = this.state.questions
+            questionTemp[idxQ].options[idxO] = val
+            this.setState({ questions: questionTemp })
+        }
     }
     // INPUT HANDLE
 
 
-    // CHECK INPUTS
+    // VALIDATE INPUTS
     validateInput = () => {
         let err = ''
 
@@ -227,8 +233,8 @@ class BuatPolling extends Component {
 
             Axios.post(urlAPI + '/polling/buatPolling', formdata, options)
                 .then(res => {
-                    toast.success('Polling berhasil disimpan. Polling kamu akan ditampilkan setelah diverifikasi oleh admin.')
-                    setTimeout(() => window.location.pathname = '/user/polling', 1000)
+                    toast.success('Polling berhasil disimpan dan akan diverifikasi oleh admin.')
+                    setTimeout(() => window.location.pathname = '/user/polling', 1500)
                 })
                 .catch(err => {
                     toast.error('Server bermasalah, coba lagi nanti.')

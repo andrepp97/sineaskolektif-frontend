@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
+import { MDBAnimation } from 'mdbreact';
 import { urlAPI } from '../../5. helper/database';
 
 // IMPORT COMPONENTS
@@ -49,6 +50,8 @@ class SemuaCampaign extends Component {
             <div className="page-padding">
                 <div className="container px-3 px-sm-5">
 
+                    <MDBAnimation type="fadeIn">
+
                     <div
                         className="position-absolute d-flex justify-content-center align-items-center"
                         style={{ top: 0, left: 0, right: 0, minHeight: '50vh', background: '#EDEDED' }}
@@ -75,6 +78,8 @@ class SemuaCampaign extends Component {
                                 {this.renderAllCampaign()}
                             </div>
                     }
+
+                    </MDBAnimation>
 
                 </div>
             </div>

@@ -8,7 +8,7 @@ const Footer = () => {
             <MDBContainer className="text-center text-md-left">
                 <MDBRow>
                     <MDBCol md="6" className='my-3'>
-                        <h5 className="title">ABOUT KOLASU</h5>
+                        <h5 className="title">ABOUT SINEAS KOLEKTIF</h5>
                         <ul className='list-group'>
                             <li className="list-unstyled">
                                 <a href="#!" className='grey-text'>FAQ</a>
