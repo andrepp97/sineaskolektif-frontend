@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { MDBBtn, MDBIcon, MDBAlert } from 'mdbreact';
+import Logo from '../../3. assets/img/Logo.png';
 
 // Import User Actions //
 import { userLogin } from '../../4. redux/actions';
-// Import User Actions //
 
 
 class Login extends Component {
@@ -82,13 +82,16 @@ class Login extends Component {
 
     // Main Render
     render() {
-        if (this.props.username) {
-            return <Redirect to='/' />
-        }
-
-        return (
-            <div className="page-container bg-auth">
-                <div className="row justify-content-center align-items-center" style={{height:'100vh'}}>
+        return this.props.username
+        ? <Redirect to='/' />
+        : (
+            <div className="page-container bg-auth pb-5">
+                <div className="text-center mt-5">
+                    <Link to="/">
+                        <img src={Logo} alt="Sineas Kolektif" height={75} />
+                    </Link>
+                </div>
+                <div className="row justify-content-center align-items-center">
                     <div className="col-sm-8 col-md-6 mt-5 px-5">
                         <div className="card-auth p-4 px-md-5">
 
@@ -138,19 +141,19 @@ class Login extends Component {
                             {
                                 this.props.isLoading
                                 ?
-                                    <MDBBtn color="indigo" className="rounded btn-block" disabled>
+                                    <button className="btn btn-block btn-auth" disabled>
                                         <div className="spinner-border spinner-border-sm" role="status" />
-                                    </MDBBtn>
+                                    </button>
                                 :
-                                    <MDBBtn color="indigo" className="rounded btn-block" onClick={this.onUserLogin}>
+                                    <button className="btn btn-block btn-auth" onClick={this.onUserLogin}>
                                         <MDBIcon icon="sign-in-alt" />
                                         <b className="ml-2">Masuk</b>
-                                    </MDBBtn>
+                                    </button>
                             }
                             </div>
 
                             <p className="mt-4 text-center">
-                                Belum punya akun ? <Link to="/register">Daftar</Link>
+                                Baru di Sineas Kolektif? <Link to="/register">Daftar</Link>
                             </p>
 
                         </div>
