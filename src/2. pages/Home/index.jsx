@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { MDBAnimation } from 'mdbreact';
 import Axios from 'axios';
 
 // HELPER
@@ -48,6 +49,7 @@ class Homepage extends Component {
 
     // LIFECYCLE
     componentDidMount() {
+        window.scrollTo(0,0)
         this.getNewCampaigns()
         this.getNewPollings()
     }
@@ -57,16 +59,9 @@ class Homepage extends Component {
     // MAIN RENDER
     render() {
         return (
-            <div className='pb-5 bg-home'>
+            <MDBAnimation type="fadeIn" className='pb-5 bg-home'>
 
                 <Jumbotron />
-
-                {/* DIVIDER */}
-                <div className='container px-sm-5'>
-                    <hr className="my-0" />
-                    <hr className="my-0" />
-                </div>
-                {/* DIVIDER */}
 
                 {
                     this.state.loadingCampaign
@@ -92,7 +87,6 @@ class Homepage extends Component {
                 </div>
                 {/* DIVIDER */}
 
-
                 {
                     this.state.loadingPolling
                     ?
@@ -101,7 +95,7 @@ class Homepage extends Component {
                         <Pollings data={this.state.pollingData} />
                 }
                 
-            </div>
+            </MDBAnimation>
         );
     }
 }
