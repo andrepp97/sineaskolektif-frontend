@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { MDBBtn, MDBIcon, MDBAlert } from 'mdbreact';
+import { MDBIcon, MDBAlert } from 'mdbreact';
+import { Link, Redirect } from 'react-router-dom';
 import Logo from '../../3. assets/img/Logo.png';
 
 // Import User Actions //
