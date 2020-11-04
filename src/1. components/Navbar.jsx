@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import {
-    MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem,
-    MDBNavbarToggler, MDBCollapse, MDBBtn, MDBIcon,
-    MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem
+    MDBBtn, MDBIcon,
+    MDBNavbar, MDBNavbarBrand,
+    MDBNavbarNav, MDBNavItem,
+    MDBNavbarToggler, MDBCollapse, MDBDropdown,
+    MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem
 } from "mdbreact";
 
 // REDUX //
@@ -34,13 +36,15 @@ class Navbar extends Component {
     render() {
         return (
             <MDBNavbar
-                color="indigo" expand="md" dark
-                fixed="top" className='px-5 py-1'
+                dark
+                fixed="top"
+                expand="md"
+                className='px-5 py-1 sineaskolektif-navbar'
             >
                 <MDBNavbarBrand>
-                    <a href='/'>
+                    <Link to='/'>
                         <img src={Logo} alt="LOGO" height={31} />
-                    </a>
+                    </Link>
                 </MDBNavbarBrand>
                 <MDBNavbarToggler onClick={this.toggleCollapse} />
                 <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
@@ -52,12 +56,16 @@ class Navbar extends Component {
                                 </MDBDropdownToggle>
                                 <MDBDropdownMenu>
                                     <MDBDropdownItem>
-                                        <MDBIcon icon="pager" />
-                                        <Link to='/campaign'>Campaign</Link>
+                                        <Link to='/tentang'>Tentang Kami</Link>
                                     </MDBDropdownItem>
                                     <MDBDropdownItem>
-                                        <MDBIcon icon="poll-h" />
+                                        <Link to='/campaign'>Proyek</Link>
+                                    </MDBDropdownItem>
+                                    <MDBDropdownItem>
                                         <Link to='/polling'>Polling</Link>
+                                    </MDBDropdownItem>
+                                    <MDBDropdownItem>
+                                        <Link to='/blog'>Blog</Link>
                                     </MDBDropdownItem>
                                 </MDBDropdownMenu>
                             </MDBDropdown>
@@ -70,12 +78,12 @@ class Navbar extends Component {
                             ?
                                 <>
                                     <Link to='/login'>
-                                        <MDBBtn color='white' className='rounded px-3 py-1'>
+                                        <MDBBtn color='white' className='border px-3 py-1'>
                                             Masuk
                                         </MDBBtn>
                                     </Link>
                                     <Link to='/register'>
-                                        <MDBBtn color='indigo' className='rounded px-3 py-1'>
+                                        <MDBBtn color="transparent" className='white-text border px-3 py-1'>
                                             Daftar
                                         </MDBBtn>
                                     </Link>
