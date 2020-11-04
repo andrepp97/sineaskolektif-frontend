@@ -13,8 +13,8 @@ const Campaign = ({data}) => {
         <div className='container text-center py-5'>
 
             <div className="col-md-6 offset-md-3 justify-content-center">
-                <h2 className="h2-responsive">CAMPAIGN TERBARU</h2>
-                <p className='opacity-80'>Yuk Temukan Kolaborasi Menarik Disini</p>
+                <h2 className="h2-responsive">PROYEK TERBARU</h2>
+                <p className='opacity-90'>Proyek-proyek baru yang menanti dukunganmu</p>
             </div>
 
                 {
@@ -24,7 +24,7 @@ const Campaign = ({data}) => {
                             <div className="row justify-content-center my-4">
                                 {renderCampaignData(data)}
                             </div>
-                            <Link to='/campaign' className="btn btn-outline-indigo rounded-pill mb-4">
+                            <Link to='/campaign' className="btn btn-outline-indigo font-weight-bold rounded mb-4">
                                 LIHAT SEMUA
                             </Link>
                         </>
