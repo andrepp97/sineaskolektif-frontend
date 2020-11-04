@@ -38,8 +38,8 @@ class Navbar extends Component {
             <MDBNavbar
                 dark
                 fixed="top"
-                expand="md"
-                className='px-5 py-1 sineaskolektif-navbar'
+                expand="sm"
+                className='sineaskolektif-navbar px-sm-5 px-3 py-1'
             >
                 <MDBNavbarBrand>
                     <Link to='/'>
@@ -52,7 +52,7 @@ class Navbar extends Component {
                         <MDBNavItem className='ml-2'>
                             <MDBDropdown>
                                 <MDBDropdownToggle nav caret>
-                                    <span className="mr-1 font-small font-weight-bold">TELUSURI</span>
+                                    <span className="mr-1 font-small font-weight-bold">Telusuri</span>
                                 </MDBDropdownToggle>
                                 <MDBDropdownMenu>
                                     <MDBDropdownItem>
