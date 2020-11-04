@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { MDBBtn, MDBIcon, MDBAlert } from 'mdbreact';
+import Logo from '../../3. assets/img/Logo.png';
 
 // REDUX
 import { connect } from 'react-redux';
@@ -107,12 +108,16 @@ class Register extends Component {
             return <Redirect to={`/EmailVerifying?email=${this.props.emailSuccess}`} />
         }
 
-        if (this.props.username) {
-            return <Redirect to='/' />
-        }
+        return this.props.username
+        ? <Redirect to='/' />
+        : (
+            <div className="page-container bg-auth pb-5">
 
-        return (
-            <div className="page-container bg-auth py-5">
+                <div className="text-center mt-5">
+                    <Link to="/">
+                        <img src={Logo} alt="Sineas Kolektif" height={75} />
+                    </Link>
+                </div>
 
                 <div className="row justify-content-center align-items-center">
 
@@ -184,23 +189,27 @@ class Register extends Component {
                             />
                             <p className='text-danger font-small text-right'>{this.state.pass2Error}</p>
 
+                            <p className='text-center font-small opacity-90 py-2'>
+                                Dengan mendaftar, saya menyetujui <span className="font-weight-bold">Syarat dan Ketentuan</span> serta <span className="font-weight-bold">Kebijakan Privasi</span>
+                            </p>
+
                             <div className="mt-4">
                                 {
                                     this.props.isLoading
                                     ?
-                                        <MDBBtn color="indigo" className="rounded btn-block" disabled>
+                                        <button className="btn btn-block btn-auth" disabled>
                                             <div className="spinner-border spinner-border-sm" role="status" />
-                                        </MDBBtn>
+                                        </button>
                                     :
-                                        <MDBBtn color="indigo" className="rounded btn-block" onClick={this.onUserRegister}>
+                                        <button className="btn btn-block btn-auth" onClick={this.onUserRegister}>
                                             <MDBIcon icon="user-plus" />
                                             <b className="ml-2">Buat Akun</b>
-                                        </MDBBtn>
+                                        </button>
                                 }
                             </div>
 
                             <p className="mt-4 text-center">
-                                Sudah terdaftar ? <Link to="/login">Masuk</Link>
+                                Sudah punya akun? <Link to="/login">Masuk</Link>
                             </p>
 
                         </div>
