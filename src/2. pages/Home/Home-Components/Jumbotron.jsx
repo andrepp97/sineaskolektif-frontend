@@ -52,14 +52,14 @@ const JumbotronPage = (props) => {
             containerClass="carousel-container"
         >
             {items.map((item,idx) => (
-                <div className="carousel-slide">
+                <div key={idx} className="carousel-slide">
                     <img
                         alt={item.image}
                         src={item.image}
                         className="carousel-img"
                     />
                     <div className="carousel-text">
-                        <h3>{item.tag}</h3>
+                        <h3 className="h3-responsive">{item.tag}</h3>
                         <p>{item.text}</p>
                         <Link to={item.url} className="btn border carousel-btn">
                             {item.button}
