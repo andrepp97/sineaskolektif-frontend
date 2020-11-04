@@ -14,7 +14,7 @@ const Polling = ({ data }) => {
 
             <div className="col-md-6 offset-md-3 justify-content-center">
                 <h2 className="h2-responsive">POLLING TERBARU</h2>
-                <p className='opacity-80'>Partisipasi Kamu Itu Berharga</p>
+                <p className='opacity-90'>Polling-polling baru yang menanti dukunganmu</p>
             </div>
 
             {
@@ -24,7 +24,7 @@ const Polling = ({ data }) => {
                         <div className="row justify-content-center my-4">
                             {renderPollingData(data)}
                         </div>
-                        <Link to='/polling' className="btn btn-outline-indigo rounded-pill mb-4">
+                        <Link to='/polling' className="btn btn-outline-indigo font-weight-bold rounded mb-4">
                             LIHAT SEMUA
                         </Link>
                     </>
