@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { withRouter, useLocation } from 'react-router-dom';
 
 // REDUX //
@@ -28,7 +28,7 @@ const App = (props) => {
   useEffect(() => {
     let user = localStorage.getItem('token')
     props.keepLogin(user)
-  }, [])
+  }, [props])
 
   // RENDER
   return !props.loadChecker
