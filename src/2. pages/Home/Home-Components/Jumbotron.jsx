@@ -1,45 +1,73 @@
 import React from "react";
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import JumboBG from '../../../3. assets/img/jumbotron.svg';
+import { connect } from "react-redux";
+import { Link } from "react-router-dom"
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+
+// ASSETS
+import Home1 from '../../../3. assets/img/Home/home1.jpg';
+import Home2 from '../../../3. assets/img/Home/home2.jpg';
+import Home3 from '../../../3. assets/img/Home/home3.jpg';
+
+const responsive = {
+    md: {
+        breakpoint: { max: 4000, min: 0 },
+        items: 1
+    },
+}
+
+const items = [
+    {
+        image: Home1,
+        url: "/campaign",
+        button: "Lebih Lanjut",
+        tag: "#HidupiKarya",
+        text: "Bermacam ide film kreatif ada disini",
+    },
+    {
+        image: Home2,
+        url: "/campaign",
+        button: "Lebih Lanjut",
+        tag: "#BikinNyata",
+        text: "Realisasikan karya film kamu disini",
+    },
+    {
+        image: Home3,
+        url: "/buat-campaign",
+        button: "Buat Proyek",
+        tag: "#MulaiDiSini",
+        text: "Dari Karya Bikin Perubahan",
+    },
+]
 
 const JumbotronPage = (props) => {
     return (
-        <div id="jumbotron" className="animated fadeIn">
-            <div className="container d-flex h-100">
-                <div className="row justify-content-center align-items-center">
-                    <div className="col-md-6 order-md-last mt-5 mt-md-0">
-                        <img src={JumboBG} alt="" className="img-fluid" />
-                    </div>
-                    <div className="col-md-6 py-5 order-md-first">
-                        {
-                            props.username
-                            ?
-                                <div className="text-center">
-                                    <Link to='/buat-campaign' className="btn btn-indigo">
-                                        Buat Campaign
-                                    </Link>
-                                    <Link to='/buat-polling' className="btn btn-outline-elegant">
-                                        Buat Polling
-                                    </Link>
-                                    <p className="mt-4">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore labore aperiam dolores error, in amet quaerat natus ab vero voluptates consequuntur.
-                                    </p>
-                                </div>
-                            :
-                                <div>
-                                    <h2 className="h2-responsive text-center text-md-left mb-4" style={{ color:'#3F51B5' }}>
-                                        Work Smarter, Not Harder
-                                    </h2>
-                                    <p>
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum ab sit eaque exercitationem dicta iste dolorem incidunt ratione corrupti.
-                                    </p>
-                                </div>
-                        }
+        <Carousel
+            infinite
+            autoPlay
+            showDots={true}
+            draggable={true}
+            autoPlaySpeed={4000}
+            responsive={responsive}
+            containerClass="carousel-container"
+        >
+            {items.map((item,idx) => (
+                <div className="carousel-slide">
+                    <img
+                        alt={item.image}
+                        src={item.image}
+                        className="carousel-img"
+                    />
+                    <div className="carousel-text">
+                        <h3>{item.tag}</h3>
+                        <p>{item.text}</p>
+                        <Link to={item.url} className="btn border carousel-btn">
+                            {item.button}
+                        </Link>
                     </div>
                 </div>
-            </div>
-        </div>
+            ))}
+        </Carousel>
     )
 }
 
