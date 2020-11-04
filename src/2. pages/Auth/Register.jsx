@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { MDBIcon, MDBAlert } from 'mdbreact';
 import { Link, Redirect } from 'react-router-dom';
-import { MDBBtn, MDBIcon, MDBAlert } from 'mdbreact';
 import Logo from '../../3. assets/img/Logo.png';
 
 // REDUX
