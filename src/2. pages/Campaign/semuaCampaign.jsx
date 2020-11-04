@@ -47,42 +47,54 @@ class SemuaCampaign extends Component {
     // MAIN RENDER
     render() {
         return (
-            <div className="page-padding">
-                <div className="container">
+            <MDBAnimation type="fadeIn" className="bg-home">
 
-                    <MDBAnimation type="fadeIn">
-
-                    <div
-                        className="position-absolute d-flex justify-content-center align-items-center"
-                        style={{ top: 0, left: 0, right: 0, minHeight: '50vh', background: '#EDEDED' }}
-                    >
-                        <div className="text-center px-3">
-                            <h4 className="h4-responsive mb-4">Cari Campaign Yang Menarik</h4>
-                            <select id="sort-campaign" className="custom-select shadow rounded-pill px-3" style={{ cursor:'pointer' }}>
-                                <option value="" defaultChecked hidden>Urutkan Campaign</option>
-                                <option value="terbaru">Terbaru</option>
-                                <option value="populer">Terpopuler</option>
-                                <option value="progress">Progress</option>
-                            </select>
+                {/* FILTER */}
+                <div className="campaign-filter">
+                    <div className="campaign-filter-inputs text-center">
+                        <h3 className="h3-responsive border-bottom mb-4 pb-4">
+                            Cari Kolaborasi Karya Favoritmu
+                        </h3>
+                        <div className="row">
+                            <div className="col">
+                                <label htmlFor="kategori-campaign">Kategori</label>
+                                <select id="kategori-campaign" className="custom-select pointer-cursor">
+                                    <option value="" disabled>
+                                        -- Pilih Kategori --
+                                    </option>
+                                    <option value={1}>Semua</option>
+                                    <option value={2}>Film</option>
+                                    <option value={3}>Film Pendek</option>
+                                    <option value={4}>Film Dokumenter</option>
+                                </select>
+                            </div>
+                            <div className="col">
+                                <label htmlFor="sort-campaign">Sortir</label>
+                                <select id="sort-campaign" className="custom-select pointer-cursor">
+                                    <option value="" disabled>
+                                        -- Sortir --
+                                    </option>
+                                    <option value={1}>Semua</option>
+                                    <option value={2}>Terbaru</option>
+                                    <option value={3}>Terpopuler</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
+                </div>
 
+                {/* CONTENT */}
+                <div className="container py-5">
                     {
                         this.state.isLoading
-                        ?
-                            <div style={{ marginTop: '10rem' }}>
-                                <Loader />
-                            </div>
-                        :
-                            <div className="row justify-content-center" style={{ marginTop: '30vh' }}>
-                                {this.renderAllCampaign()}
-                            </div>
+                        ? <Loader />
+                        : <div className="row justify-content-center">
+                            {this.renderAllCampaign()}
+                        </div>
                     }
-
-                    </MDBAnimation>
-
                 </div>
-            </div>
+
+            </MDBAnimation>
         );
     }
 }
